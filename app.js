@@ -1,8 +1,6 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
-
-init();
-animate();
+var mult = 1;
 
 window.onresize = function() {
   location.reload();
@@ -10,10 +8,10 @@ window.onresize = function() {
 
 function init() {
   camera = new THREE.PerspectiveCamera(
-    20,
+    10,
     window.innerWidth / window.innerHeight,
     0.01,
-    10
+    100
   );
   camera.position.z = 3;
 
@@ -29,14 +27,27 @@ function init() {
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
+  var material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+  var points = [];
+  points.push(new THREE.Vector3(-10, 0, 0));
+  points.push(new THREE.Vector3(0, 10, 0));
+  points.push(new THREE.Vector3(10, 0, 0));
+
+  var geometry = new THREE.BufferGeometry().setFromPoints(points);
+  var line = new THREE.Line(geometry, material);
+  scene.add(line);
 }
 
 function animate() {
   requestAnimationFrame(animate);
 
+  camera.position.z += 0.01 * mult;
+  if (camera.position.z > 10 || camera.position.z < 3) mult = mult * -1;
   mesh.rotation.x += 0.01;
   mesh.rotation.y += 0.02;
-  // mesh.rotation.z += 0.03;
 
   renderer.render(scene, camera);
 }
+
+init();
+animate();
