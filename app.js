@@ -4,6 +4,10 @@ var geometry, material, mesh;
 init();
 animate();
 
+window.onresize = function() {
+  location.reload();
+};
+
 function init() {
   camera = new THREE.PerspectiveCamera(
     20,
