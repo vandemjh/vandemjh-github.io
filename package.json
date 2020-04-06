@@ -19,6 +19,6 @@
     "start": "node app.js",
     "test": "mocha --reporter list"
   },
-  "author": "",
+  "author": "vandemjh",
   "license": "ISC"
 }
