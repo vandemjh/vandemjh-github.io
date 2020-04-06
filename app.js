@@ -45,6 +45,10 @@ function animate() {
   if (camera.position.z > 10 || camera.position.z < 3) mult = mult * -1;
   mesh.rotation.x += 0.01;
   mesh.rotation.y += 0.02;
+  mesh.position.x += 0.001 * mult
+  mesh.position.y += 0.001 * mult
+  mesh.position.z += 0.001 * mult
+  console.log(mesh.position)
 
   renderer.render(scene, camera);
 }
