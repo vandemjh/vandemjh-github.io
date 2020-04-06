@@ -1,9 +1,11 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
+
 var mult = 1;
 
-window.onresize = function() {
+window.onresize = function () {
   location.reload();
+  // could just change the window.innerWidth and height here...
 };
 
 function init() {
@@ -16,7 +18,9 @@ function init() {
   camera.position.z = 3;
 
   scene = new THREE.Scene();
+}
 
+function initCube(x, y, z) {
   geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
   material = new THREE.MeshNormalMaterial();
   for (let i = 0; i < 1; i++) {
@@ -45,13 +49,14 @@ function animate() {
   if (camera.position.z > 10 || camera.position.z < 3) mult = mult * -1;
   mesh.rotation.x += 0.01;
   mesh.rotation.y += 0.02;
-  mesh.position.x += 0.001 * mult
-  mesh.position.y += 0.001 * mult
-  mesh.position.z += 0.001 * mult
-  console.log(mesh.position)
+  // mesh.position.x += 0.001 * mult
+  // mesh.position.y += 0.001 * mult * -1
+  // mesh.position.z += 0.001 * mult * -1
+  console.log(mesh.position);
 
   renderer.render(scene, camera);
 }
 
 init();
+initCube();
 animate();
