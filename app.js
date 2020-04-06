@@ -57,10 +57,10 @@ function loop() {
 
 init();
 initCube(0, 0, 0);
-initCube(0.1,0.1,0,0.1);
-initCube(-0.1,0.1,0,-0.1);
-initCube(0.1,-0.1,0,0.1);
-initCube(-0.1,-0.1,0,-0.1);
+initCube(0.1, 0.1, 0, 0.1);
+initCube(-0.1, 0.1, 0, -0.1);
+initCube(0.1, -0.1, 0, 0.1);
+initCube(-0.1, -0.1, 0, -0.1);
 
 // console.log(cubes[0].position.x);
 // cubes[0].position.x += 100;
