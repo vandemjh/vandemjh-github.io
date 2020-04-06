@@ -1,6 +1,8 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
 
+const boxDimensions = 0.2;
+
 var mult = 1;
 
 window.onresize = function () {
@@ -21,25 +23,19 @@ function init() {
 }
 
 function initCube(x, y, z) {
-  geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+  geometry = new THREE.BoxGeometry(boxDimensions, boxDimensions, boxDimensions);
   material = new THREE.MeshNormalMaterial();
-  for (let i = 0; i < 1; i++) {
-    mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-  }
+  mesh = new THREE.Mesh(geometry, material);
+  mesh.position.x = x;
+  mesh.position.y = y;
+  mesh.position.z = z;
+  
+  scene.add(mesh);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
   var material = new THREE.LineBasicMaterial({ color: 0x0000ff });
-  var points = [];
-  points.push(new THREE.Vector3(-10, 0, 0));
-  points.push(new THREE.Vector3(0, 10, 0));
-  points.push(new THREE.Vector3(10, 0, 0));
-
-  var geometry = new THREE.BufferGeometry().setFromPoints(points);
-  var line = new THREE.Line(geometry, material);
-  scene.add(line);
 }
 
 function animate() {
@@ -58,5 +54,6 @@ function animate() {
 }
 
 init();
-initCube();
+initCube(0,0,0);
+// initCube(0,0,0);
 animate();
