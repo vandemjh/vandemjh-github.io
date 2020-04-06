@@ -1,5 +1,6 @@
 var camera, scene, renderer;
-var geometry, material, mesh;
+var geometry, material;
+var cubes = [];
 
 const boxDimensions = 0.2;
 
@@ -20,40 +21,48 @@ function init() {
   camera.position.z = 3;
 
   scene = new THREE.Scene();
-}
-
-function initCube(x, y, z) {
-  geometry = new THREE.BoxGeometry(boxDimensions, boxDimensions, boxDimensions);
-  material = new THREE.MeshNormalMaterial();
-  mesh = new THREE.Mesh(geometry, material);
-  mesh.position.x = x;
-  mesh.position.y = y;
-  mesh.position.z = z;
-  
-  scene.add(mesh);
-
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
-  var material = new THREE.LineBasicMaterial({ color: 0x0000ff });
 }
 
-function animate() {
-  requestAnimationFrame(animate);
+function initCube(x, y, z) {
+  toPush = new THREE.Mesh(
+    new THREE.BoxGeometry(boxDimensions, boxDimensions, boxDimensions),
+    new THREE.MeshNormalMaterial()
+  );
+  toPush.position.x = x;
+  toPush.position.y = y;
+  toPush.position.z = z;
+
+  scene.add(toPush);
+  cubes.push(toPush);
+
+  // var material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+}
+
+function loop() {
+  requestAnimationFrame(loop);
 
   camera.position.z += 0.01 * mult;
   if (camera.position.z > 10 || camera.position.z < 3) mult = mult * -1;
-  mesh.rotation.x += 0.01;
-  mesh.rotation.y += 0.02;
-  // mesh.position.x += 0.001 * mult
-  // mesh.position.y += 0.001 * mult * -1
-  // mesh.position.z += 0.001 * mult * -1
-  console.log(mesh.position);
+
+  for (cube of cubes) {
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.02;
+  }
 
   renderer.render(scene, camera);
 }
 
 init();
-initCube(0,0,0);
-// initCube(0,0,0);
-animate();
+initCube(0, 0, 0);
+initCube(0.1,0.1,0,0.1);
+initCube(-0.1,0.1,0,-0.1);
+initCube(0.1,-0.1,0,0.1);
+initCube(-0.1,-0.1,0,-0.1);
+
+// console.log(cubes[0].position.x);
+// cubes[0].position.x += 100;
+// console.log(cubes[0].position.x);
+loop();
