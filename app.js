@@ -2,7 +2,7 @@ var camera, scene, renderer;
 var geometry, material;
 var cubes = [];
 
-const boxDimensions = 0.2;
+const boxDimensions = 0.01;
 
 var mult = 1;
 
@@ -44,23 +44,24 @@ function initCube(x, y, z) {
 function loop() {
   requestAnimationFrame(loop);
 
-  camera.position.z += 0.01 * mult;
-  if (camera.position.z > 10 || camera.position.z < 3) mult = mult * -1;
+  // camera.position.z += 0.01 * mult;
+  // if (camera.position.z > 10 || camera.position.z < 3) mult = mult * -1;
 
   for (cube of cubes) {
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.02;
+    // cube.rotation.x += 0.01;
+    // cube.rotation.y += 0.02;
   }
 
   renderer.render(scene, camera);
 }
 
+offset = boxDimensions
 init();
 initCube(0, 0, 0);
-initCube(0.1, 0.1, 0, 0.1);
-initCube(-0.1, 0.1, 0, -0.1);
-initCube(0.1, -0.1, 0, 0.1);
-initCube(-0.1, -0.1, 0, -0.1);
+initCube(offset, offset, 0, offset); 
+initCube(-offset, offset, 0, -offset);
+initCube(offset, -offset, 0, offset);
+initCube(-offset, -offset, 0, -offset);
 
 // console.log(cubes[0].position.x);
 // cubes[0].position.x += 100;
