@@ -95,10 +95,11 @@ function loop() {
     // cube.rotation.y += 0.02;
     // console.log(cube.rotation.y)
   }
-  // camera.rotation.z += 0.001;
+  camera.rotation.z += 0.002;
 
   renderer.render(scene, camera);
 }
+
 
 init();
 
@@ -110,12 +111,14 @@ initCube(boxDimensions - horiChange, boxDimensions + vertChange, 0);
 initCube(-boxDimensions + horiChange, boxDimensions + vertChange, 0);
 initCube(boxDimensions - horiChange, -boxDimensions - vertChange, 0);
 initCube(-boxDimensions + horiChange, -boxDimensions - vertChange, 0);
-initCube(boxDimensions + horiChange + 0.2, boxDimensions - vertChange - 1.6, 0);
+initCube(boxDimensions + horiChange + 0.225, boxDimensions - vertChange - 1.61, 0);
 initCube(
-  -boxDimensions - vertChange - 0.4,
-  -boxDimensions + horiChange + 1.4,
+  -boxDimensions - vertChange - 0.425,
+  -boxDimensions + horiChange + 1.41,
   0
 );
+
+// console.log(cubes[0].
 
 // cubeNum = 4;
 // for (let i = -cubeNum; i < cubeNum; i += boxDimensions) {
