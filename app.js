@@ -2,7 +2,8 @@ var camera, scene, renderer;
 var geometry, material;
 var cubes = [];
 
-const boxDimensions = 0.2;
+// const boxDimensions = 0.2;
+const boxDimensions = 2;
 
 var mult = 1;
 
@@ -18,7 +19,7 @@ function init() {
     0.01,
     100
   );
-  camera.position.z = 5;
+  camera.position.z = 50;
 
   scene = new THREE.Scene();
   renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -40,11 +41,21 @@ function initCube(x, y, z) {
     boxDimensions,
     boxDimensions
   );
-  for (var i = 0; i < geometry.faces.length; i += 2) {
-  	randColor = Math.random() * 0xffffff
-    geometry.faces[i].color.setHex(randColor);
-    geometry.faces[i + 1].color.setHex(randColor);
-  }
+  // #1C1C1C - Dark
+  // #808080 - Grey
+  // #ECECEC - Light
+  geometry.faces[0].color.set("#ECECEC");
+  geometry.faces[1].color.set("#ECECEC");
+  geometry.faces[2].color.set("#808080");
+  geometry.faces[3].color.set("#808080");
+  geometry.faces[4].color.set("#1C1C1C");
+  geometry.faces[5].color.set("#1C1C1C");
+  geometry.faces[8].color.set("#ECECEC");
+  geometry.faces[9].color.set("#ECECEC");
+  geometry.faces[6].color.set("#1C1C1C");
+  geometry.faces[7].color.set("#1C1C1C");
+  geometry.faces[10].color.set("#808080");
+  geometry.faces[11].color.set("#808080");
   toPush = new THREE.Mesh(
     geometry,
     // new THREE.BoxGeometry(boxDimensions, boxDimensions, boxDimensions),
@@ -56,9 +67,15 @@ function initCube(x, y, z) {
     // new THREE.MeshToonMaterial()
     // new THREE.MeshBasicMaterial()
   );
+
+  toPush.rotateX(Math.PI / 4);
+  toPush.rotateY(Math.PI / 4);
+
   toPush.position.x = x;
   toPush.position.y = y;
   toPush.position.z = z;
+
+  // toPush.rotation.x += .02;
 
   scene.add(toPush);
   cubes.push(toPush);
@@ -73,33 +90,39 @@ function loop() {
   // if (camera.position.z > 10 || camera.position.z < 3) mult = mult * -1;
 
   for (cube of cubes) {
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.02;
+    // cube.rotation.x += 0.01;
+    // cube.rotation.y += 0.02;
+    // cube.rotation.y += 0.02;
+    // console.log(cube.rotation.y)
   }
+  // camera.rotation.z += 0.001;
 
   renderer.render(scene, camera);
 }
 
-offset = boxDimensions;
 init();
 
-// for (let i = -(window.innerWidth * 2); i < window.innerWidth * 2; i += offset) {
-// for (
-// let j = -(window.innerHeight * 2);
-// j < window.innerHeight * 2;
-// j += offset
-// ) {
-// console.log(i, j);
-// initCube(i * boxDimensions / offset, j * boxDimensions / offset, 0);
-// }
-// }
-
 initCube(0, 0, 0);
-// alert(window.innerWidth / offset)
-initCube(offset, offset, 0, offset);
-initCube(-offset, offset, 0, -offset);
-initCube(offset, -offset, 0, offset);
-initCube(-offset, -offset, 0, -offset);
+var snug = 0.1;
+var horiChange = boxDimensions / 4 + snug;
+var vertChange = boxDimensions / 4 - snug;
+initCube(boxDimensions - horiChange, boxDimensions + vertChange, 0);
+initCube(-boxDimensions + horiChange, boxDimensions + vertChange, 0);
+initCube(boxDimensions - horiChange, -boxDimensions - vertChange, 0);
+initCube(-boxDimensions + horiChange, -boxDimensions - vertChange, 0);
+initCube(boxDimensions + horiChange + 0.2, boxDimensions - vertChange - 1.6, 0);
+initCube(
+  -boxDimensions - vertChange - 0.4,
+  -boxDimensions + horiChange + 1.4,
+  0
+);
+
+// cubeNum = 4;
+// for (let i = -cubeNum; i < cubeNum; i += boxDimensions) {
+// for (let j = -cubeNum; j < cubeNum; j += boxDimensions) {
+// initCube(i, j, 0);
+// }
+// }
 
 // console.log(cubes[0].position.x);
 // cubes[0].position.x += 100;
