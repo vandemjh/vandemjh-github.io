@@ -132,7 +132,7 @@ function loop() {
   // console.log(cube.rotation.y)
   // }
   // camera.rotation.z += 0.02;
-  cubeGroup.rotation.z += 0.01;
+  cubeGroup.rotation.z += 0.002;
 
 
   renderer.render(scene, camera);
