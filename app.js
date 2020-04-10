@@ -22,28 +22,23 @@ function init() {
     0.01,
     100
   );
+  camera.position.z = 80;
 
-  console.log(window.innerWidth, window.innerHeight,)
-
-  camera.position.z = 80
-  
-
-  lightSource = new THREE.PointLight(0xffffff, 1, 20);
-  lightSource.position.set(0, 10, 10);
-  lightSource1 = new THREE.PointLight(0xffffff, 1, 20);
-  lightSource1.position.set(10, -10, 10);
+  lightSource = new THREE.PointLight(0xffffff, 1, 12);
+  lightSource.position.set(0, 1, 10);
+  // lightSource1 = new THREE.PointLight(0xffffff, 1, 12);
+  // lightSource1.position.set(5, -5, 10);
 
   scene = new THREE.Scene();
   scene.add(lightSource);
-  scene.add(lightSource1);
+  // scene.add(lightSource1);
   scene.add(cubeGroup);
-  
 
   renderer = new THREE.WebGLRenderer(); //{ antialias: true }
   renderer.setSize(window.innerWidth, window.innerHeight);
-  
+
   // console.log(canvas.devicePixelRatio);
-  
+
   document.body.appendChild(renderer.domElement);
 }
 
@@ -112,7 +107,6 @@ function loop() {
   // }
   // camera.rotation.z += 0.02;
 
-
   cubeGroup.rotation.z += 0.002;
 
   renderer.render(scene, camera);
@@ -120,24 +114,36 @@ function loop() {
 
 init();
 
-initCube(0, 0, 0);
-var snug = 0.1;
-var horiChange = boxDimensions / 4 + snug;
-var vertChange = boxDimensions / 4 - snug;
-initCube(boxDimensions - horiChange, boxDimensions + vertChange, 0);
-initCube(-boxDimensions + horiChange, boxDimensions + vertChange, 0);
-initCube(boxDimensions - horiChange, -boxDimensions - vertChange, 0);
-initCube(-boxDimensions + horiChange, -boxDimensions - vertChange, 0);
-initCube(
-boxDimensions + horiChange + 0.225,
-boxDimensions - vertChange - 1.61,
-0
-);
-initCube(
--boxDimensions - vertChange - 0.425,
--boxDimensions + horiChange + 1.41,
-0
-);
+function placeCubes(offsetX, offsetY) {
+  initCube(offsetX + 0, offsetY + 0, 0);
+  var snug = 0.1;
+  var horiChange = boxDimensions / 4 + snug;
+  var vertChange = boxDimensions / 4 - snug;
+  initCube(offsetX + boxDimensions - horiChange, offsetY +  boxDimensions + vertChange, 0);
+  initCube(offsetX + -boxDimensions + horiChange, offsetY +  boxDimensions + vertChange, 0);
+  initCube(offsetX + boxDimensions - horiChange,  offsetY + -boxDimensions - vertChange, 0);
+  initCube(offsetX + -boxDimensions + horiChange,  offsetY + -boxDimensions - vertChange, 0);
+  initCube(offsetX + 
+    boxDimensions + horiChange + 0.221,
+    offsetY +  boxDimensions - vertChange - 1.61,
+    0
+  );
+  initCube(offsetX + 
+    -boxDimensions - vertChange - 0.421,
+     offsetY + -boxDimensions + horiChange + 1.41,
+    0
+  );
+}
 
+placeCubes(0, 0);
+placeCubes(5.631, 4.8);
+placeCubes(-5.631, 4.8);
+placeCubes(-5.631, -4.8);
+placeCubes(5.631, -4.8);
+placeCubes(5.631, -4.8);
+placeCubes(8.45, 0);
+placeCubes(-8.45, 0);
+placeCubes(0, -4.8);
+placeCubes(0, 4.8);
 
 loop();
