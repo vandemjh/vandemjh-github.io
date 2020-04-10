@@ -10,22 +10,6 @@ var dark = new THREE.Color(0x1c1c1c);
 var grey = new THREE.Color(0x808080);
 var light = new THREE.Color(0xececec);
 
-// var colorChangeMultiplier = 0.0;
-// var colorChange = [
-  // -1 * colorChangeMultiplier,
-  // -1 * colorChangeMultiplier,
-  // -1 * colorChangeMultiplier,
-  // -1 * colorChangeMultiplier,
-  // 1 * colorChangeMultiplier,
-  // 1 * colorChangeMultiplier,
-  // 1 * colorChangeMultiplier,
-  // 1 * colorChangeMultiplier,
-  // -1 * colorChangeMultiplier,
-  // -1 * colorChangeMultiplier,
-  // -1 * colorChangeMultiplier,
-  // -1 * colorChangeMultiplier,
-// ];
-
 window.onresize = function () {
   location.reload();
   // could just change the window.innerWidth and height here...
@@ -38,21 +22,28 @@ function init() {
     0.01,
     100
   );
-  // camera.position.y -= 0.6
-  camera.position.z = 80;
+
+  console.log(window.innerWidth, window.innerHeight,)
+
+  camera.position.z = 80
+  
 
   lightSource = new THREE.PointLight(0xffffff, 1, 20);
   lightSource.position.set(0, 10, 10);
   lightSource1 = new THREE.PointLight(0xffffff, 1, 20);
-  lightSource1.position.set(10, 0, 10);
+  lightSource1.position.set(10, -10, 10);
 
   scene = new THREE.Scene();
   scene.add(lightSource);
   scene.add(lightSource1);
   scene.add(cubeGroup);
+  
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer = new THREE.WebGLRenderer(); //{ antialias: true }
   renderer.setSize(window.innerWidth, window.innerHeight);
+  
+  // console.log(canvas.devicePixelRatio);
+  
   document.body.appendChild(renderer.domElement);
 }
 
@@ -63,21 +54,6 @@ function initCube(x, y, z) {
     boxDimensions
   );
 
-  // var dark = "#1C1C1C";
-  // var grey = "#808080";
-  // var light = "#ECECEC";
-  // geometry.faces[0].color.set(light);
-  // geometry.faces[1].color.set(light);
-  // geometry.faces[2].color.set(light);
-  // geometry.faces[3].color.set(light);
-  // geometry.faces[4].color.set(dark);
-  // geometry.faces[5].color.set(dark);
-  // geometry.faces[6].color.set(dark);
-  // geometry.faces[7].color.set(dark);
-  // geometry.faces[8].color.set(grey);
-  // geometry.faces[9].color.set(grey);
-  // geometry.faces[10].color.set(grey);
-  // geometry.faces[11].color.set(grey);
   toPush = new THREE.Mesh(
     geometry,
     new THREE.MeshStandardMaterial()
@@ -89,19 +65,22 @@ function initCube(x, y, z) {
     // new THREE.MeshBasicMaterial()
   );
   // toPush.geometry.colorsNeedUpdate = true;
-
-  toPush.rotateX(Math.PI / 4);
-  toPush.rotateY(Math.PI / 4);
-
   toPush.position.x = x;
   toPush.position.y = y;
   toPush.position.z = z;
 
+  // console.log(toPush.getWorldPosition())
+  // console.log(camera.getWorldPosition())
+  // toPush.center(0,0,0)
+
+  toPush.rotateX(Math.PI / 4);
+  toPush.rotateY(Math.PI / 4);
+
   // toPush.rotation.x += .02;
 
   scene.add(toPush);
-  cubeGroup.add(toPush)
-  
+  cubeGroup.add(toPush);
+
   cubes.push(toPush);
 
   // var material = new THREE.LineBasicMaterial({ color: 0x0000ff });
@@ -132,8 +111,9 @@ function loop() {
   // console.log(cube.rotation.y)
   // }
   // camera.rotation.z += 0.02;
-  cubeGroup.rotation.z += 0.002;
 
+
+  cubeGroup.rotation.z += 0.002;
 
   renderer.render(scene, camera);
 }
@@ -149,14 +129,15 @@ initCube(-boxDimensions + horiChange, boxDimensions + vertChange, 0);
 initCube(boxDimensions - horiChange, -boxDimensions - vertChange, 0);
 initCube(-boxDimensions + horiChange, -boxDimensions - vertChange, 0);
 initCube(
-  boxDimensions + horiChange + 0.225,
-  boxDimensions - vertChange - 1.61,
-  0
+boxDimensions + horiChange + 0.225,
+boxDimensions - vertChange - 1.61,
+0
 );
 initCube(
-  -boxDimensions - vertChange - 0.425,
-  -boxDimensions + horiChange + 1.41,
-  0
+-boxDimensions - vertChange - 0.425,
+-boxDimensions + horiChange + 1.41,
+0
 );
+
 
 loop();
