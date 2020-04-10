@@ -6,27 +6,25 @@ var cubeGroup = new THREE.Group();
 // const boxDimensions = 0.2;
 const boxDimensions = 2;
 
-var mult = 1;
-
 var dark = new THREE.Color(0x1c1c1c);
 var grey = new THREE.Color(0x808080);
 var light = new THREE.Color(0xececec);
 
-var colorChangeMultiplier = 0.0;
-var colorChange = [
-  -1 * colorChangeMultiplier,
-  -1 * colorChangeMultiplier,
-  -1 * colorChangeMultiplier,
-  -1 * colorChangeMultiplier,
-  1 * colorChangeMultiplier,
-  1 * colorChangeMultiplier,
-  1 * colorChangeMultiplier,
-  1 * colorChangeMultiplier,
-  -1 * colorChangeMultiplier,
-  -1 * colorChangeMultiplier,
-  -1 * colorChangeMultiplier,
-  -1 * colorChangeMultiplier,
-];
+// var colorChangeMultiplier = 0.0;
+// var colorChange = [
+  // -1 * colorChangeMultiplier,
+  // -1 * colorChangeMultiplier,
+  // -1 * colorChangeMultiplier,
+  // -1 * colorChangeMultiplier,
+  // 1 * colorChangeMultiplier,
+  // 1 * colorChangeMultiplier,
+  // 1 * colorChangeMultiplier,
+  // 1 * colorChangeMultiplier,
+  // -1 * colorChangeMultiplier,
+  // -1 * colorChangeMultiplier,
+  // -1 * colorChangeMultiplier,
+  // -1 * colorChangeMultiplier,
+// ];
 
 window.onresize = function () {
   location.reload();
@@ -41,12 +39,12 @@ function init() {
     100
   );
   // camera.position.y -= 0.6
-  camera.position.z = 60;
+  camera.position.z = 80;
 
-  lightSource = new THREE.PointLight(0xffffff, 1, 15);
-  lightSource.position.set(0, 5, 10);
-  lightSource1 = new THREE.PointLight(0xffffff, 1, 15);
-  lightSource1.position.set(5, 0, 10);
+  lightSource = new THREE.PointLight(0xffffff, 1, 20);
+  lightSource.position.set(0, 10, 10);
+  lightSource1 = new THREE.PointLight(0xffffff, 1, 20);
+  lightSource1.position.set(10, 0, 10);
 
   scene = new THREE.Scene();
   scene.add(lightSource);
@@ -68,18 +66,18 @@ function initCube(x, y, z) {
   // var dark = "#1C1C1C";
   // var grey = "#808080";
   // var light = "#ECECEC";
-  geometry.faces[0].color.set(light);
-  geometry.faces[1].color.set(light);
-  geometry.faces[2].color.set(light);
-  geometry.faces[3].color.set(light);
-  geometry.faces[4].color.set(dark);
-  geometry.faces[5].color.set(dark);
-  geometry.faces[6].color.set(dark);
-  geometry.faces[7].color.set(dark);
-  geometry.faces[8].color.set(grey);
-  geometry.faces[9].color.set(grey);
-  geometry.faces[10].color.set(grey);
-  geometry.faces[11].color.set(grey);
+  // geometry.faces[0].color.set(light);
+  // geometry.faces[1].color.set(light);
+  // geometry.faces[2].color.set(light);
+  // geometry.faces[3].color.set(light);
+  // geometry.faces[4].color.set(dark);
+  // geometry.faces[5].color.set(dark);
+  // geometry.faces[6].color.set(dark);
+  // geometry.faces[7].color.set(dark);
+  // geometry.faces[8].color.set(grey);
+  // geometry.faces[9].color.set(grey);
+  // geometry.faces[10].color.set(grey);
+  // geometry.faces[11].color.set(grey);
   toPush = new THREE.Mesh(
     geometry,
     new THREE.MeshStandardMaterial()
