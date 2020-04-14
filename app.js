@@ -24,13 +24,13 @@ function init() {
   );
   camera.position.z = 80;
 
-  lightSource = new THREE.PointLight(0xffffff, 1, 12.5, 2)
+  lightSource = new THREE.PointLight(0xffffff, 1, 12, 2)
   lightSource.position.set(0, 1, 10);
-  lightSource1 = new THREE.PointLight(0xffffff, 1, 12.5, 2);
+  lightSource1 = new THREE.PointLight(0xffffff, 1, 12, 2);
   lightSource1.position.set(0, -1, 10)
-  lightSource2 = new THREE.PointLight(0xffffff, 1, 12.5, 2);
+  lightSource2 = new THREE.PointLight(0xffffff, 1, 12, 2);
   lightSource2.position.set(-1, 0, 10)  
-  lightSource3 = new THREE.PointLight(0xffffff, 1, 12.5, 2);
+  lightSource3 = new THREE.PointLight(0xffffff, 1, 12, 2);
   lightSource3.position.set(1, 0, 10)
 
 
@@ -115,7 +115,7 @@ function loop() {
   // }
   // camera.rotation.z += 0.02;
 
-  cubeGroup.rotation.z += 0.02;
+  cubeGroup.rotation.z += 0.002;
 
   cubeGroup.needsUpdate = true
 
