@@ -24,14 +24,22 @@ function init() {
   );
   camera.position.z = 80;
 
-  lightSource = new THREE.PointLight(0xffffff, 1, 12);
+  lightSource = new THREE.PointLight(0xffffff, 1, 12.5, 2)
   lightSource.position.set(0, 1, 10);
-  // lightSource1 = new THREE.PointLight(0xffffff, 1, 12);
-  // lightSource1.position.set(5, -5, 10);
+  lightSource1 = new THREE.PointLight(0xffffff, 1, 12.5, 2);
+  lightSource1.position.set(0, -1, 10)
+  lightSource2 = new THREE.PointLight(0xffffff, 1, 12.5, 2);
+  lightSource2.position.set(-1, 0, 10)  
+  lightSource3 = new THREE.PointLight(0xffffff, 1, 12.5, 2);
+  lightSource3.position.set(1, 0, 10)
+
 
   scene = new THREE.Scene();
   scene.add(lightSource);
-  // scene.add(lightSource1);
+  scene.add(lightSource1);
+  scene.add(lightSource2);
+  scene.add(lightSource3);
+  
   scene.add(cubeGroup);
 
   renderer = new THREE.WebGLRenderer(); //{ antialias: true }
@@ -73,7 +81,7 @@ function initCube(x, y, z) {
 
   // toPush.rotation.x += .02;
 
-  scene.add(toPush);
+  // scene.add(toPush);
   cubeGroup.add(toPush);
 
   cubes.push(toPush);
@@ -107,7 +115,9 @@ function loop() {
   // }
   // camera.rotation.z += 0.02;
 
-  cubeGroup.rotation.z += 0.002;
+  cubeGroup.rotation.z += 0.02;
+
+  cubeGroup.needsUpdate = true
 
   renderer.render(scene, camera);
 }
