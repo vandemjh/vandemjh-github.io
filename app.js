@@ -67,7 +67,7 @@ function init() {
     scene.add(cubeGroup);
     scene.add(lightGroup);
 
-    renderer = new THREE.WebGLRenderer(); //{ antialias: true }
+    renderer = new THREE.WebGLRenderer({ antialias: true }); //TODO for slow clients turn antialias off
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // console.log(canvas.devicePixelRatio);
