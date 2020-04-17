@@ -1,7 +1,7 @@
 {
-  "background_color": "black",
-  "theme_color": "black",
-  "categories": ["jack", "vandemeulebroecke"],
-  "description": "Personal site for Jack Vandemeulebroecke",
-  "display": "fullscreen"
+    "background_color": "black",
+    "theme_color": "black",
+    "categories": ["jack", "vandemeulebroecke"],
+    "description": "Personal site for Jack Vandemeulebroecke",
+    "display": "fullscreen"
 }
