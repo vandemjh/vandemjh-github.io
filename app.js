@@ -1,5 +1,4 @@
 var camera, scene, renderer;
-var geometry, material;
 var cubeGroup = new THREE.Group();
 var lightGroup = new THREE.Group();
 
@@ -13,9 +12,9 @@ var light = new THREE.Color(0xececec);
 window.onresize = function () {
     // location.reload();
     camera.aspect = window.innerWidth / window.innerHeight;
-    				camera.updateProjectionMatrix();
-    
-    				renderer.setSize( window.innerWidth, window.innerHeight );
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
 };
 
 document.addEventListener("mousedown", onMouseDown, false);
@@ -26,10 +25,8 @@ function onMouseDown(e) {
         ((window.innerHeight / 2 - e.clientY) * 2) / window.innerHeight,
         -1 / Math.tan((camera.fov * Math.PI) / 180)
     );
-    // console.log(vectorMouse)
     vectorMouse.applyQuaternion(camera.quaternion);
     vectorMouse.normalize();
-    // console.log(vectorMouse)
 
     var vectorObject = new THREE.Vector3(); //vector from camera to cubeGroup
     vectorObject.set(
@@ -84,25 +81,28 @@ function initCube(x, y, z) {
         boxDimensions,
         boxDimensions
     );
-
-    toPush = new THREE.Mesh(
-        geometry,
-        new THREE.MeshToonMaterial()
-        // new THREE.MeshBasicMaterial()
+    var texture = new THREE.TextureLoader().load(
+        "https://avatars1.githubusercontent.com/u/38433983?s=400&u=75d70a4e8d56d7323e874c204a1a652a8f1f58d2&v=4"
     );
+    var material = new THREE.MeshBasicMaterial({ map: texture });
+    var mesh = new THREE.Mesh(geometry, material);
+
     // toPush.geometry.colorsNeedUpdate = true;
-    toPush.position.x = x;
-    toPush.position.y = y;
-    toPush.position.z = z;
+    mesh.position.x = Math.random() * (x - -x) + -x;
+    mesh.position.y = Math.random() * (y - -y) + -y;
+    mesh.position.z = Math.random() * (10 - -10) + -10;
+    // mesh.position.x = x;
+    // mesh.position.y = y;
+    // mesh.position.z = z;
 
-    // console.log(toPush.getWorldPosition())
+    // console.log(mesh.getWorldPosition())
     // console.log(camera.getWorldPosition())
-    // toPush.center(0,0,0)
+    // mesh.center(0,0,0)
 
-    toPush.rotateX(Math.PI / 4);
-    toPush.rotateY(Math.PI / 4);
+    mesh.rotateX(Math.PI / 4);
+    mesh.rotateY(Math.PI / 4);
 
-    cubeGroup.add(toPush);
+    cubeGroup.add(mesh);
 }
 
 function loop() {
