@@ -11,8 +11,10 @@ var grey = new THREE.Color(0x808080);
 var light = new THREE.Color(0xececec);
 
 window.onresize = function () {
-    location.reload();
-    // could just change the window.innerWidth and height here...
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
 };
 
 function init() {
