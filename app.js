@@ -36,8 +36,10 @@ function onMouseDown(e) {
     );
     vectorObject.normalize();
     if ((vectorMouse.angleTo(vectorObject) * 180) / Math.PI < 1) {
+    	console.log((vectorMouse.angleTo(vectorObject) * 180) / Math.PI)
         console.log("clicked");
     }
+    console.log((vectorMouse.angleTo(vectorObject) * 180) / Math.PI)
 }
 
 function init() {
@@ -49,23 +51,23 @@ function init() {
     );
     camera.position.z = 20;
 
-    lightSource = new THREE.PointLight(0xffffff, 1, 10, 2);
-    lightSource.position.set(0, 1, 8);
-    lightSource1 = new THREE.PointLight(0xffffff, 1, 10, 2);
-    lightSource1.position.set(0, -1, 8);
-    lightSource2 = new THREE.PointLight(0xffffff, 1, 10, 2);
-    lightSource2.position.set(-1, 0, 8);
-    lightSource3 = new THREE.PointLight(0xffffff, 1, 10, 2);
-    lightSource3.position.set(1, 0, 8);
+    // lightSource = new THREE.PointLight(0xffffff, 1, 10, 2);
+    // lightSource.position.set(0, 1, 8);
+    // lightSource1 = new THREE.PointLight(0xffffff, 1, 10, 2);
+    // lightSource1.position.set(0, -1, 8);
+    // lightSource2 = new THREE.PointLight(0xffffff, 1, 10, 2);
+    // lightSource2.position.set(-1, 0, 8);
+    // lightSource3 = new THREE.PointLight(0xffffff, 1, 10, 2);
+    // lightSource3.position.set(1, 0, 8);
 
     scene = new THREE.Scene();
-    lightGroup.add(lightSource);
-    lightGroup.add(lightSource1);
-    lightGroup.add(lightSource2);
-    lightGroup.add(lightSource3);
+    // lightGroup.add(lightSource);
+    // lightGroup.add(lightSource1);
+    // lightGroup.add(lightSource2);
+    // lightGroup.add(lightSource3);
 
     scene.add(cubeGroup);
-    scene.add(lightGroup);
+    // scene.add(lightGroup);
 
     renderer = new THREE.WebGLRenderer({ antialias: true }); //TODO for slow clients turn antialias off
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -88,19 +90,19 @@ function initCube(x, y, z) {
     var mesh = new THREE.Mesh(geometry, material);
 
     // toPush.geometry.colorsNeedUpdate = true;
-    mesh.position.x = Math.random() * (x - -x) + -x;
-    mesh.position.y = Math.random() * (y - -y) + -y;
-    mesh.position.z = Math.random() * (10 - -10) + -10;
-    // mesh.position.x = x;
-    // mesh.position.y = y;
-    // mesh.position.z = z;
+    // mesh.position.x = Math.random() * (x - -x) + -x;
+    // mesh.position.y = Math.random() * (y - -y) + -y;
+    // mesh.position.z = Math.random() * (10 - -10) + -10;
+    mesh.position.x = x;
+    mesh.position.y = y;
+    mesh.position.z = z;
 
     // console.log(mesh.getWorldPosition())
     // console.log(camera.getWorldPosition())
     // mesh.center(0,0,0)
 
-    mesh.rotateX(Math.PI / 4);
-    mesh.rotateY(Math.PI / 4);
+    // mesh.rotateX(Math.PI / 4);
+    // mesh.rotateY(Math.PI / 4);
 
     cubeGroup.add(mesh);
 }
@@ -155,15 +157,17 @@ function placeCubes(offsetX, offsetY) {
     );
 }
 
-placeCubes(0, 0);
-placeCubes(5.631, 4.8);
-placeCubes(-5.631, 4.8);
-placeCubes(-5.631, -4.8);
-placeCubes(5.631, -4.8);
-placeCubes(5.631, -4.8);
-placeCubes(8.45, 0);
-placeCubes(-8.45, 0);
-placeCubes(0, -4.8);
-placeCubes(0, 4.8);
+initCube(0, 0, 10);
+
+// placeCubes(0, 0);
+// placeCubes(5.631, 4.8);
+// placeCubes(-5.631, 4.8);
+// placeCubes(-5.631, -4.8);
+// placeCubes(5.631, -4.8);
+// placeCubes(5.631, -4.8);
+// placeCubes(8.45, 0);
+// placeCubes(-8.45, 0);
+// placeCubes(0, -4.8);
+// placeCubes(0, 4.8);
 
 loop();
