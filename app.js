@@ -34,12 +34,18 @@ function onMouseDown(e) {
         cubeGroup.position.y - camera.position.y,
         cubeGroup.position.z - camera.position.z
     );
+    var bb = new THREE.Box3();
+    bb.setFromObject(cubeGroup.children[0]);
+    console.log(bb);
+    console.log()
+    // console.log(bb.containsPoint(pointA), bb.containsPoint(pointB));
+    // cubeGroup.children.forEach(x => console.log(x.position))
+
     vectorObject.normalize();
     if ((vectorMouse.angleTo(vectorObject) * 180) / Math.PI < 1) {
     	console.log((vectorMouse.angleTo(vectorObject) * 180) / Math.PI)
         console.log("clicked");
     }
-    console.log((vectorMouse.angleTo(vectorObject) * 180) / Math.PI)
 }
 
 function init() {
@@ -49,7 +55,7 @@ function init() {
         0.01,
         100
     );
-    camera.position.z = 20;
+    camera.position.z = 10;
 
     // lightSource = new THREE.PointLight(0xffffff, 1, 10, 2);
     // lightSource.position.set(0, 1, 8);
@@ -101,8 +107,8 @@ function initCube(x, y, z) {
     // console.log(camera.getWorldPosition())
     // mesh.center(0,0,0)
 
-    // mesh.rotateX(Math.PI / 4);
-    // mesh.rotateY(Math.PI / 4);
+    mesh.rotateX(Math.PI / 4);
+    mesh.rotateY(Math.PI / 4);
 
     cubeGroup.add(mesh);
 }
@@ -157,7 +163,8 @@ function placeCubes(offsetX, offsetY) {
     );
 }
 
-initCube(0, 0, 10);
+
+initCube(0, 0, 0);
 
 // placeCubes(0, 0);
 // placeCubes(5.631, 4.8);
