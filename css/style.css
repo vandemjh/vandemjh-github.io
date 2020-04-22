@@ -1,3 +1,11 @@
+
+body {
+	margin: 0;
+	 overflow: hidden;
+}
+p {
+	font-family: Ubuntu Mono;
+}
 #t {
     font-size: 150%;
     color: white;
@@ -25,24 +33,15 @@
     text-align: center;
     z-index: 100;
 }
-img {
-
-    max-width: 5%;
-    height: auto;
-    top: 90%;
-    z-index: 100;
-
-
-}
-#socials{
-position: absolute;
-	display: flex;
-	    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+#socials {
+    top: 80%;
+	z-index: 100;
+    position: absolute;
 }
 #icon {
-	  flex: 50%;
-  padding: 5px;
+	max-width: 30%;
+	# padding: 5px;
+	display: inline-block;
+	  margin-left: auto;
+  margin-right: auto;
 }
