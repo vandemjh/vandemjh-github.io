@@ -1,5 +1,5 @@
 #t {
-	font-size: 150%;
+    font-size: 150%;
     color: white;
     position: absolute;
     top: 10%;
@@ -8,7 +8,7 @@
     z-index: 100;
 }
 #m {
-	font-size: 100%;
+    font-size: 100%;
     color: white;
     position: absolute;
     top: 20%;
@@ -17,11 +17,32 @@
     z-index: 100;
 }
 #b {
-	font-size: 50%;
+    font-size: 50%;
     color: white;
     position: absolute;
     top: 20%;
     width: 100%;
     text-align: center;
     z-index: 100;
+}
+img {
+
+    max-width: 5%;
+    height: auto;
+    top: 90%;
+    z-index: 100;
+
+
+}
+#socials{
+position: absolute;
+	display: flex;
+	    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+#icon {
+	  flex: 50%;
+  padding: 5px;
 }
