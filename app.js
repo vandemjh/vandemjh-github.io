@@ -61,8 +61,15 @@ function init() {
 }
 
 function initCube(x, y, z) {
-	// Prevents overlapping cubes
-    if (cubeGroup.children.some( (cube) => distance(cube, { position: { 'x': x, 'y': y, 'z': z } }) < boxDimensions)) return;
+    // Prevents overlapping cubes
+    if (
+        cubeGroup.children.some(
+            (cube) =>
+                distance(cube, { position: { x: x, y: y, z: z } }) <
+                boxDimensions
+        )
+    )
+        return;
     var geometry = new THREE.BoxGeometry(
         boxDimensions,
         boxDimensions,
@@ -94,17 +101,11 @@ function loop() {
     if (counter >= 10) {
         counter = 0;
         // console.log(cu.beGroup.children[random(0, cubeGroup.children.length - 1)])
-        xcube = cubeGroup.children[
-            random(0, cubeGroup.children.length - 1)
-        ]
+        xcube = cubeGroup.children[random(0, cubeGroup.children.length - 1)];
         xcube.reverseX = xcube.reverseX == true ? false : true;
-                ycube = cubeGroup.children[
-            random(0, cubeGroup.children.length - 1)
-        ]
+        ycube = cubeGroup.children[random(0, cubeGroup.children.length - 1)];
         ycube.reverseY = ycube.reverseY == true ? false : true;
-                zcube = cubeGroup.children[
-            random(0, cubeGroup.children.length - 1)
-        ]
+        zcube = cubeGroup.children[random(0, cubeGroup.children.length - 1)];
         zcube.reverseZ = zcube.reverseZ == true ? false : true;
     }
 
@@ -115,7 +116,7 @@ function loop() {
         if (cube.reverseY) {
             cube.rotation.y -= 0.003;
         }
-                if (cube.reverseZ) {
+        if (cube.reverseZ) {
             cube.rotation.z -= 0.003;
         }
     });
