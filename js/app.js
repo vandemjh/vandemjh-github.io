@@ -87,7 +87,7 @@ function initCube(x, y, z) {
 }
 
 function random(min, max) {
-    return Math.round(Math.random() * max + min);
+    return Math.floor(Math.random() * max + min);
 }
 
 function loop() {
