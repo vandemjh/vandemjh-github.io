@@ -34,9 +34,6 @@ p {
     justify-content: center;
     position: absolute;
 }
-a {
-    display: inline-block;
-}
 #icon {
     padding: 10px;
     max-width: 5%;
