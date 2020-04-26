@@ -1,5 +1,5 @@
 var jsfiles = [
-	// "app.js",
+	"app.js",
 	"multiple.js"
 ];
 
