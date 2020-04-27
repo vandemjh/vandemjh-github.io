@@ -34,6 +34,7 @@ p {
     display: flex;
     justify-content: center;
     position: absolute;
+    align-items: center;
 }
 #icon {
     max-width: 5%;
