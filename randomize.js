@@ -1,6 +1,7 @@
 var jsfiles = [
-	"app.js",
-	"multiple.js"
+	// "app.js",
+	// "multiple.js",
+	"click.js"
 ];
 
 window.onload = () => {
