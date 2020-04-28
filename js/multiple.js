@@ -19,7 +19,7 @@ function init() {
     cubeGroup = new THREE.Group();
     outterCube = new THREE.Group();
     scene.add(cubeGroup);
-    
+
     renderer = new THREE.WebGLRenderer({ antialias: true }); //TODO for slow clients turn antialias off
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
@@ -52,12 +52,12 @@ function loop() {
         });
     }
     // if ((counter > 400 && counter < 600) || cubeGroup.children[0].rotation.x != 0) { //quick and dirty
-        // cubeGroup.children.forEach((cube) => {
-            // cube.rotation.x += 0.02 * multiplier;
-            // cube.rotation.y += 0.02 * multiplier;
-            // cube.rotation.z += 0.02 * multiplier;
-            // if (cube.rotation.x > 1 || cube.rotation.x < -1) multiplier *= -1;
-        // });
+    // cubeGroup.children.forEach((cube) => {
+    // cube.rotation.x += 0.02 * multiplier;
+    // cube.rotation.y += 0.02 * multiplier;
+    // cube.rotation.z += 0.02 * multiplier;
+    // if (cube.rotation.x > 1 || cube.rotation.x < -1) multiplier *= -1;
+    // });
     // }
     if (counter > 600 && counter < 800) {
         cubeGroup.children.forEach((cube) => {
@@ -73,10 +73,16 @@ function initCubes() {
     for (let i = -2; i <= 2; i++)
         for (let j = -2; j <= 2; j++)
             for (let k = -2; k <= 2; k++) {
-            if (i == -2 || i == 2 || j == -2 || j == 2 || k == -2 || k == 2) {
-            	            (initCube(i * 2, j * 2, k * 2));
-            } else
-            initCube(i * 2, j * 2, k * 2);
+                if (
+                    i == -2 ||
+                    i == 2 ||
+                    j == -2 ||
+                    j == 2 ||
+                    k == -2 ||
+                    k == 2
+                ) {
+                    initCube(i * 2, j * 2, k * 2);
+                } else initCube(i * 2, j * 2, k * 2);
             }
     cubeGroup.rotateX(Math.PI / 4);
     cubeGroup.rotateY(Math.PI / 4);
