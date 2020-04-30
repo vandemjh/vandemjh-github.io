@@ -64,7 +64,7 @@ function initSun(x, y, z) {
         sun.position.x + radius,
         sun.position.y + radius,
         sun.position.z + radius
-    );    
+    );
     var sunBot = new THREE.Vector3(
         sun.position.x - radius,
         sun.position.y - radius,
@@ -72,7 +72,7 @@ function initSun(x, y, z) {
     );
     sun.top = sunTop;
     sun.bot = sunBot;
-    
+
     // console.log(sunTop, sunBot)
     for (let i = sunBot.y; i < sunTop.y; i++) {
         var line = new THREE.Line(
@@ -87,7 +87,7 @@ function initSun(x, y, z) {
         line.position.y = i;
         lineGroup.add(line);
     }
-    
+
     lineGroup.update = () => {
         lineGroup.children.forEach((line) => {
             var radius = sun.geometry.parameters.radius;
@@ -97,7 +97,7 @@ function initSun(x, y, z) {
             // sun.worldToLocal(relativePosition);
             line.position.y -= 0.01; // * factor;
             line.material.linewidth += 0.01;
-            var viewingAngle = 1; //Change this due to the lines being closer to the camera than the sun
+            var viewingAngle = 0.5; //Change this due to the lines being closer to the camera than the sun
             if (line.position.y < sun.bot.y - viewingAngle) {
                 line.position.y = sun.top.y - viewingAngle;
                 line.material.linewidth = 0.00001;
@@ -110,29 +110,78 @@ function initSun(x, y, z) {
 function initMountains() {
     var material = new THREE.LineBasicMaterial({ color: "rgb(251, 59, 228)" });
     mountainGroup = new THREE.Group();
-    // var line = new THREE.Line(
-        // new THREE.Geometry().setFromPoints([
-            // new THREE.Vector3(visibleWidthAtZDepth(0), 0, 10),
-            // new THREE.Vector3(-visibleWidthAtZDepth(0), 0, 10),
-        // ]),
-        // material
-    // );
-    // 
-// 
-    // mountainGroup.add(line);
-
-    for(var close = 0; close < camera.position.z; close++) {
     var line = new THREE.Line(
-                new THREE.Geometry().setFromPoints([
-                    new THREE.Vector3(visibleWidthAtZDepth(close), 0, close),
-                    new THREE.Vector3(-visibleWidthAtZDepth(close), 0, close),
-                ]),
-                material
-            )
-            line.position.z = close
-    mountainGroup.add(line)
+        new THREE.Geometry().setFromPoints([
+            new THREE.Vector3(visibleWidthAtZDepth(0), 0, 0),
+            new THREE.Vector3(-visibleWidthAtZDepth(0), 0, 0),
+        ]),
+        material
+    );
+    // scene.add(line);
+    var min = -camera.position.z;
+    var max = camera.position.z;
+
+    var randArray = [];
+    for (var x = min; x < max; x++) {
+        var temp = [];
+        for (var z = 0; z < max; z++) {
+            temp.push(Math.random());
+        }
+        randArray.push(temp);
     }
+    // console.log(randArray);
+
+    for (var x = min; x < max; x++) {
+        var points = [];
+        for (var z = 0; z < max; z++) {
+            // points.push(new THREE.Vector3(x, 0, z));
+            points.push(new THREE.Vector3(x, randArray[x-min][z], z));
+        }
+        mountainGroup.add(
+            new THREE.Line(new THREE.Geometry().setFromPoints(points), material)
+        );
+        points = [];
+    }
+
+    for (var z = 0; z < max; z++) {
+        var points = [];
+        for (var x = min; x < max; x++) {
+            points.push(new THREE.Vector3(x, randArray[x-min][z], z));
+            mountainGroup.add(
+                new THREE.Line(
+                    new THREE.Geometry().setFromPoints(points),
+                    material
+                )
+            );
+        }
+    }
+
+    // var count = 0;
+    // var x = 0;
+    // var y = 0;
+    // var heights = []
+    // for (line of mountainGroup.children) {
+    // var temp = [];
+    // for (vert of line.geometry.vertices) {
+    // temp.push(new THREE.Vector3(x++, vert.y, z++));
+    // }
+    // heights.push(temp);
+    // }
+    // console.log(heights);
+
     console.log(mountainGroup);
+    mountainGroup.update = () => {
+        mountainGroup.children.forEach((line) => {
+            // if (line.horizontal) {
+            line.position.z += 0.02;
+            if (line.position.z > camera.position.z) {
+                line.position.z = 0;
+                // console.log(line)
+            }
+            if (line.verticle) {
+            }
+        });
+    };
     scene.add(mountainGroup);
 }
 
@@ -144,7 +193,7 @@ function init() {
         100
     );
     camera.position.z = 50;
-    camera.position.y = 3;
+    camera.position.y = 2;
     scene = new THREE.Scene();
     cubeGroup = new THREE.Group();
     outterCube = new THREE.Group();
@@ -159,13 +208,14 @@ function loop() {
     requestAnimationFrame(loop);
     renderer.render(scene, camera);
     lineGroup.update();
+    mountainGroup.update();
     // sun.position.z = camera.position.z + 50;
     // camera.position.z -= 0.2
 }
 
 init();
 
-initSun(0, 10, 0);
+initSun(0, 5, -5);
 initMountains();
 
 loop();
