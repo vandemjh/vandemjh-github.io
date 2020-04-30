@@ -6,15 +6,23 @@ mouse.y = undefined;
 
 var cubeGroup = new THREE.Group();
 
-document.addEventListener("mousemove", () => {
-	event.preventDefault();
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-}, false);
-document.addEventListener("click", () => {
-	multiplier *= -1;
-	// console.log(multiplier)
-}, false);
+document.addEventListener(
+    "mousemove",
+    () => {
+        event.preventDefault();
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    },
+    false
+);
+document.addEventListener(
+    "click",
+    () => {
+        multiplier *= -1;
+        // console.log(multiplier)
+    },
+    false
+);
 
 const boxDimensions = 2;
 
@@ -70,19 +78,18 @@ function initCube(x, y, z) {
 
 function loop() {
     requestAnimationFrame(loop);
-	// camera.updateMatrixWorld(); //for moving camera
+    // camera.updateMatrixWorld(); //for moving camera
     raycaster.setFromCamera(mouse, camera);
     if (raycaster.intersectObjects(scene.children).length > 0) {
-    // console.log("Intersect")
+        // console.log("Intersect")
         // console.log(mouse)
         // console.log(raycaster.intersectObjects(scene.children));
     }
     cubeGroup.rotation.z += 0.002;
-    cubeGroup.rotation.x += 0.003 * multiplier
-    cubeGroup.rotation.y += 0.005 * multiplier
-    camera.rotation.z += 0.02 * multiplier
-    
-    
+    cubeGroup.rotation.x += 0.003 * multiplier;
+    cubeGroup.rotation.y += 0.005 * multiplier;
+    camera.rotation.z += 0.02 * multiplier;
+
     cubeGroup.needsUpdate = true;
 
     renderer.render(scene, camera);
