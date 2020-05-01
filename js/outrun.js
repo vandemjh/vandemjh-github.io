@@ -96,7 +96,7 @@ function initSun(x, y, z) {
             // var relativePosition = new THREE.Vector3().copy(line.position);
             // line.localToWorld(relativePosition);
             // sun.worldToLocal(relativePosition);
-            line.position.y -= 0.01; // * factor;
+            line.position.y -= 0.01;
             line.material.linewidth += 0.01;
             var viewingAngle = 0.5; //Change this due to the lines being closer to the camera than the sun
             if (line.position.y < sun.bot.y - viewingAngle) {
@@ -115,7 +115,7 @@ function initMountains() {
     mountainGroup.update = () => {
         chunkArray.forEach((chunk) => {
             // if (line.horizontal) {
-            chunk.position.z += 0.12;
+            chunk.position.z += 0.05;
             if (chunk.position.z > camera.position.z) {
                 chunk.position.z = 0;
                 // console.log(chunk)
