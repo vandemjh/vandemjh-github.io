@@ -168,6 +168,15 @@ function initMountains() {
                 line.position.setZ(zStart);
                 chunk.add(line);
             }
+
+            //Fill points
+            // var geometry = new THREE.Geometry().setFromPoints(points).computeFaceNormals();
+            // chunk.add(
+                // new THREE.Mesh(
+                    // geometry,
+                    // new THREE.MeshBasicMaterial({ color: "black" })
+                // )
+            // );
         }
         scene.add(chunk);
         chunk.position.z = end;
