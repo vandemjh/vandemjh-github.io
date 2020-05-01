@@ -125,17 +125,18 @@ function initMountains() {
     for (var x = min; x < max; x++) {
         var temp = [];
         for (var z = 0; z < max; z++) {
-            temp.push(Math.random());
+            var slope = Math.pow(Math.abs(x) / max, 1.5); // * (Math.abs(x)/max)
+            temp.push(Math.random() * 10 * slope + 10 * slope);
         }
         randArray.push(temp);
     }
-    // console.log(randArray);
 
+    // for (var chunks = 1; chunks <= 4; chunks++) {
     for (var x = min; x < max; x++) {
         var points = [];
         for (var z = 0; z < max; z++) {
             // points.push(new THREE.Vector3(x, 0, z));
-            points.push(new THREE.Vector3(x, randArray[x-min][z], z));
+            points.push(new THREE.Vector3(x, randArray[x - min][z], z));
         }
         mountainGroup.add(
             new THREE.Line(new THREE.Geometry().setFromPoints(points), material)
@@ -146,7 +147,7 @@ function initMountains() {
     for (var z = 0; z < max; z++) {
         var points = [];
         for (var x = min; x < max; x++) {
-            points.push(new THREE.Vector3(x, randArray[x-min][z], z));
+            points.push(new THREE.Vector3(x, randArray[x - min][z], z));
             mountainGroup.add(
                 new THREE.Line(
                     new THREE.Geometry().setFromPoints(points),
@@ -155,21 +156,8 @@ function initMountains() {
             );
         }
     }
-
-    // var count = 0;
-    // var x = 0;
-    // var y = 0;
-    // var heights = []
-    // for (line of mountainGroup.children) {
-    // var temp = [];
-    // for (vert of line.geometry.vertices) {
-    // temp.push(new THREE.Vector3(x++, vert.y, z++));
     // }
-    // heights.push(temp);
-    // }
-    // console.log(heights);
 
-    console.log(mountainGroup);
     mountainGroup.update = () => {
         mountainGroup.children.forEach((line) => {
             // if (line.horizontal) {
