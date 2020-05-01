@@ -1,4 +1,5 @@
-var camera, scene, renderer, sun, lineGroup, mountainGroup;
+var camera, scene, renderer, sun, lineGroup, mountainGroup, chunkArray;
+// const CHUNK_ARRAY = 5
 // https://github.com/mrdoob/three.js/blob/master/examples/webgl_postprocessing.html
 
 window.onresize = function () {
@@ -110,66 +111,80 @@ function initSun(x, y, z) {
 function initMountains() {
     var material = new THREE.LineBasicMaterial({ color: "rgb(251, 59, 228)" });
     mountainGroup = new THREE.Group();
-    var line = new THREE.Line(
-        new THREE.Geometry().setFromPoints([
-            new THREE.Vector3(visibleWidthAtZDepth(0), 0, 0),
-            new THREE.Vector3(-visibleWidthAtZDepth(0), 0, 0),
-        ]),
-        material
-    );
-    // scene.add(line);
-    var min = -camera.position.z;
-    var max = camera.position.z;
-
-    var randArray = [];
-    for (var x = min; x < max; x++) {
-        var temp = [];
-        for (var z = 0; z < max; z++) {
-            var slope = Math.pow(Math.abs(x) / max, 1.5); // * (Math.abs(x)/max)
-            temp.push(Math.random() * 10 * slope + 10 * slope);
-        }
-        randArray.push(temp);
-    }
-
-    // for (var chunks = 1; chunks <= 4; chunks++) {
-    for (var x = min; x < max; x++) {
-        var points = [];
-        for (var z = 0; z < max; z++) {
-            // points.push(new THREE.Vector3(x, 0, z));
-            points.push(new THREE.Vector3(x, randArray[x - min][z], z));
-        }
-        mountainGroup.add(
-            new THREE.Line(new THREE.Geometry().setFromPoints(points), material)
-        );
-        points = [];
-    }
-
-    for (var z = 0; z < max; z++) {
-        var points = [];
-        for (var x = min; x < max; x++) {
-            points.push(new THREE.Vector3(x, randArray[x - min][z], z));
-            mountainGroup.add(
-                new THREE.Line(
-                    new THREE.Geometry().setFromPoints(points),
-                    material
-                )
-            );
-        }
-    }
-    // }
 
     mountainGroup.update = () => {
-        mountainGroup.children.forEach((line) => {
+        chunkArray.forEach((chunk) => {
             // if (line.horizontal) {
-            line.position.z += 0.02;
-            if (line.position.z > camera.position.z) {
-                line.position.z = 0;
-                // console.log(line)
-            }
-            if (line.verticle) {
+            chunk.position.z += 0.12;
+            if (chunk.position.z > camera.position.z) {
+                chunk.position.z = 0;
+                // console.log(chunk)
             }
         });
     };
+
+    mountainGroup.loadChunk = (start, end) => {
+    	var chunk = new THREE.Group()
+        var leftSpan = -25;
+        var rightSpan = 25;
+        var zStart = 0;
+        var zEnd = end - start;
+
+        var randArray = [];
+        for (var x = leftSpan; x < rightSpan; x++) {
+            var temp = [];
+            for (var z = zStart; z <= zEnd; z++) {
+                var slope = Math.pow(Math.abs(x) / rightSpan, 1.5);
+                temp.push(Math.random() * 10 * slope + 8 * slope);
+            }
+            randArray.push(temp);
+        }
+
+        for (var x = leftSpan; x < rightSpan; x++) {
+            var points = [];
+            for (var z = zStart; z <= zEnd; z++) {
+                points.push(
+                    new THREE.Vector3(x, randArray[x - leftSpan][z - zStart], z)
+                );
+            }
+            var line = new THREE.Line(
+                new THREE.Geometry().setFromPoints(points),
+                material
+            );
+            line.position.setZ(zStart);
+            chunk.add(line);
+        }
+
+        for (var z = zStart; z <= zEnd; z++) {
+            var points = [];
+            for (var x = leftSpan; x < rightSpan; x++) {
+                points.push(
+                    new THREE.Vector3(x, randArray[x - leftSpan][z - zStart], z)
+                );
+                var line = new THREE.Line(
+                    new THREE.Geometry().setFromPoints(points),
+                    material
+                );
+                line.position.setZ(zStart);
+                chunk.add(line);
+            }
+        }
+        scene.add(chunk)
+        chunk.position.z = end
+        chunkArray.push(chunk)
+    };
+
+	// for (let i = 0; i < CHUNK_SIZE; i++)
+    mountainGroup.loadChunk(0, 5);
+    mountainGroup.loadChunk(5, 10);
+    mountainGroup.loadChunk(10, 15);
+    mountainGroup.loadChunk(15, 20);
+    mountainGroup.loadChunk(20, 25);
+    mountainGroup.loadChunk(25, 30);
+    mountainGroup.loadChunk(30, 35);
+    mountainGroup.loadChunk(35, 40); 
+    mountainGroup.loadChunk(40, 45); 
+    mountainGroup.loadChunk(45, 50); 
     scene.add(mountainGroup);
 }
 
@@ -182,23 +197,30 @@ function init() {
     );
     camera.position.z = 50;
     camera.position.y = 2;
+
     scene = new THREE.Scene();
-    cubeGroup = new THREE.Group();
-    outterCube = new THREE.Group();
-    scene.add(cubeGroup);
+    chunkArray = [];
 
     renderer = new THREE.WebGLRenderer({ antialias: true }); //TODO for slow clients turn antialias off
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 }
 
+var stats = new Stats();
+stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild(stats.dom);
+
 function loop() {
+    stats.begin();
+
+    // monitored code goes here
+
     requestAnimationFrame(loop);
     renderer.render(scene, camera);
     lineGroup.update();
     mountainGroup.update();
-    // sun.position.z = camera.position.z + 50;
-    // camera.position.z -= 0.2
+
+    stats.end();
 }
 
 init();
