@@ -206,21 +206,11 @@ function init() {
     document.body.appendChild(renderer.domElement);
 }
 
-var stats = new Stats();
-stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild(stats.dom);
-
 function loop() {
-    stats.begin();
-
-    // monitored code goes here
-
     requestAnimationFrame(loop);
     renderer.render(scene, camera);
     lineGroup.update();
     mountainGroup.update();
-
-    stats.end();
 }
 
 init();
