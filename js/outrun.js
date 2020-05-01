@@ -124,7 +124,7 @@ function initMountains() {
     };
 
     mountainGroup.loadChunk = (start, end) => {
-    	var chunk = new THREE.Group()
+        var chunk = new THREE.Group();
         var leftSpan = -25;
         var rightSpan = 25;
         var zStart = 0;
@@ -169,12 +169,12 @@ function initMountains() {
                 chunk.add(line);
             }
         }
-        scene.add(chunk)
-        chunk.position.z = end
-        chunkArray.push(chunk)
+        scene.add(chunk);
+        chunk.position.z = end;
+        chunkArray.push(chunk);
     };
 
-	// for (let i = 0; i < CHUNK_SIZE; i++)
+    // for (let i = 0; i < CHUNK_SIZE; i++)
     mountainGroup.loadChunk(0, 5);
     mountainGroup.loadChunk(5, 10);
     mountainGroup.loadChunk(10, 15);
@@ -182,9 +182,9 @@ function initMountains() {
     mountainGroup.loadChunk(20, 25);
     mountainGroup.loadChunk(25, 30);
     mountainGroup.loadChunk(30, 35);
-    mountainGroup.loadChunk(35, 40); 
-    mountainGroup.loadChunk(40, 45); 
-    mountainGroup.loadChunk(45, 50); 
+    mountainGroup.loadChunk(35, 40);
+    mountainGroup.loadChunk(40, 45);
+    mountainGroup.loadChunk(45, 50);
     scene.add(mountainGroup);
 }
 
