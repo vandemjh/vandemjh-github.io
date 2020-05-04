@@ -2,13 +2,14 @@ const jsFiles = ["app.js", "multiple.js", "click.js", "outrun.js"];
 
 window.onload = () => {
     var script = document.createElement("script");
+    var url = (window.location.href);
+    var split = url.split("?");
+    var param = split[split.length - 1];
     var urlParams = new URLSearchParams(window.location.search);
-    if (
-        urlParams.has("js") &&
-        jsFiles.some((file) => file.includes(urlParams.get("js")))
+    if (param != undefined && jsFiles.some(file => file.includes(param))
     ) {
         script.src =
-            "js/" + jsFiles.find((file) => file.includes(urlParams.get("js")));
+            "js/" + jsFiles.find(file => file.includes(param));
     } else
         script.src =
             "js/" + jsFiles[Math.floor(Math.random() * jsFiles.length)];
