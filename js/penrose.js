@@ -1,4 +1,4 @@
-var camera, scene, renderer, cubeGroup, counter, multiplier;
+var camera, scene, renderer, triangle;
 const sphereDimensions = 2;
 
 window.onresize = function () {
@@ -16,72 +16,47 @@ function init() {
     );
     camera.position.z = 50;
     scene = new THREE.Scene();
-    cubeGroup = new THREE.Group();
-    outterCube = new THREE.Group();
-    scene.add(cubeGroup);
+    triangle = new THREE.Object3D();
+    scene.add(triangle);
 
     renderer = new THREE.WebGLRenderer({ antialias: true }); //TODO for slow clients turn antialias off
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
-    counter = 0;
-    multiplier = 1;
 }
 
-function initCube(x, y, z) {
-    var geometry = new THREE.BoxGeometry(2, 2, 2);
+function rectangularPrism(width, height, depth, x, y, z) {
+    var toReturn = [];
+    var geomesh = [
+        new THREE.PlaneGeometry(width, height),
+        new THREE.MeshBasicMaterial({
+            color: "blue",
+            side: THREE.DoubleSide,
+        }),
+    ];
+    toReturn.push(
+        new THREE.Mesh(...geomesh)
+    );
 
-    mesh = new THREE.Mesh(geometry, new THREE.MeshNormalMaterial());
-    mesh.position.x = x;
-    mesh.position.y = y;
-    mesh.position.z = z;
-    cubeGroup.add(mesh);
-    return mesh;
+    return toReturn;
+}
+
+function initTriangle() {
+    for (rect of rectangularPrism(1, 30, 1, 1, 1, 1)) {
+        triangle.add(rect);
+    }
 }
 
 function loop() {
-    counter++;
+    triangle.rotation.y += 0.002;
+    // triangle.position.x += 0.002;
+    triangle.needsUpdate = true;
+    // console.log(triangle.rotation.y)
     requestAnimationFrame(loop);
     renderer.render(scene, camera);
-    cubeGroup.rotation.z += 0.002;
-    cubeGroup.rotation.y += 0.003;
-    if (counter > 200 && counter < 400) {
-        cubeGroup.children.forEach((cube) => {
-            cube.position.x *= 1.003;
-            cube.position.y *= 1.003;
-            cube.position.z *= 1.003;
-        });
-    }
-    if (counter > 600 && counter < 800) {
-        cubeGroup.children.forEach((cube) => {
-            cube.position.x /= 1.003;
-            cube.position.y /= 1.003;
-            cube.position.z /= 1.003;
-        });
-    }
-    if (counter > 1000) counter = 0;
-}
-
-function initCubes() {
-    for (let i = -2; i <= 2; i++)
-        for (let j = -2; j <= 2; j++)
-            for (let k = -2; k <= 2; k++) {
-                if (
-                    i == -2 ||
-                    i == 2 ||
-                    j == -2 ||
-                    j == 2 ||
-                    k == -2 ||
-                    k == 2
-                ) {
-                    initCube(i * 2, j * 2, k * 2);
-                } else initCube(i * 2, j * 2, k * 2);
-            }
-    cubeGroup.rotateX(Math.PI / 4);
-    cubeGroup.rotateY(Math.PI / 4);
 }
 
 init();
-
-initCubes();
-
 loop();
+initTriangle();
+
+console.log(triangle);
