@@ -1,4 +1,4 @@
-const jsFiles = ["app.js", "multiple.js", "click.js", "outrun.js"];
+const jsFiles = ["app.js", "multiple.js", "click.js", "outrun.js","penrose.js"];
 
 window.onload = () => {
     var script = document.createElement("script");
