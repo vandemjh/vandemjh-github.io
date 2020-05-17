@@ -76,25 +76,31 @@ function rectangularPrism(width, height, depth, x, y, z) {
 }
 
 function initTriangle() {
-	// Half of depth!
-	var one = rectangularPrism(4, 20, 2, -10, 0, 0);
-	one.rotateY(Math.PI / 3)
-	// one.rotateZ(Math.PI / 3)
+    // Half of depth!
+    var one = rectangularPrism(4, 20, 2, -10, 0, 0);
+    one.rotateY(Math.PI / 4);
+    one.rotateX(Math.PI / 4);
     triangle.add(one);
-    
-    var two = rectangularPrism(4, 20, 2, 12, 8, 0);
-    // two.rotateZ(Math.PI/3)
-    two.rotateZ(Math.PI / 2);
-    two.rotateX(2 *Math.PI / 3);
-    
+
+    var two = rectangularPrism(4, 20, 2, 10, 0, 0);
+    two.rotateY(Math.PI / 4);
+    two.rotateX(-Math.PI / 4);
     triangle.add(two);
+
+    var three = rectangularPrism(4, 20, 2, 0, 0, 0);
+    three.rotateY(Math.PI / 4);
+    three.rotateX(Math.PI / 4);
+    three.rotateZ(Math.PI / 2);
+    // three.position.set(-10, -7, -0);
+    triangle.add(three);
+
     // var one = rectangularPrism(4, 20, 2, 10, 0, 0);
     // rotate(one, new THREE.Vector3(0, 0, 0), Math.PI);
     // for (rect of one) triangle.add(rect);
 }
 
 function loop() {
-    // triangle.rotation.y += 0.008;
+    triangle.rotation.y += 0.001;
     // triangle.position.x += 0.002;
     triangle.needsUpdate = true;
     // console.log(triangle.rotation.y)
@@ -105,5 +111,3 @@ function loop() {
 init();
 loop();
 initTriangle();
-
-console.log(triangle);
