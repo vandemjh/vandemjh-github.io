@@ -27,7 +27,11 @@ function init() {
     document.body.appendChild(renderer.domElement);
 }
 
-function rectangularPrism(width, height, depth, x, y, z) {
+/*
+ * Creates rectangular prism at 0,0,0
+ */
+function rectangularPrism(width, height, depth) {
+    var x = (y = z = 0);
     var toReturn = new THREE.Group();
     var geomesh = [
         new THREE.PlaneGeometry(width, height),
@@ -77,24 +81,40 @@ function rectangularPrism(width, height, depth, x, y, z) {
 
 function initTriangle() {
     // Half of depth!
-    var one = rectangularPrism(4, 20, 2, 0, 0, 0);
-    // one.rotateY(Math.PI / 4);
-    // one.rotateX(Math.PI / 4);
-    one.position.set(-5, -2, 0);
-    one.rotateZ(-Math.PI / 6);
+    var one = rectangularPrism(4, 20, 2);
+    var two = rectangularPrism(4, 20, 2);
+    var three = new THREE.Group();
+    var material = new THREE.MeshLambertMaterial({
+        color: "blue",
+        side: THREE.DoubleSide,
+    });
+    material.flatShading = true;
+    three.add(
+        new THREE.Mesh(
+            new THREE.CylinderGeometry(1, 4 / Math.sqrt(2), 12, 4, 1),
+            material
+        )
+    );
+    // var three = rectangularPrism(4, 20, 2,);
+
+    two.rotateZ(Math.PI / 2);
+    two.position.set(8, -8, 0);
+    one.add(two);
+
+    three.rotateX(Math.PI / 2);
+    three.rotateY(Math.PI / 4);
+    three.position.set(0, 8, 8);
+    console.log(three);
+    one.add(three);
+
+    // one.rotateY(Math.PI / 6);
+    one.rotateX(Math.PI / 4);
+    one.rotateZ(-Math.PI / 4);
+    // one.rotateX(Math.PI / 10);
+    // one.position.set(-8, 0, 0);
     triangle.add(one);
-
-    var two = rectangularPrism(4, 20, 2, 10, 0, 0);
-    two.rotateY(Math.PI / 4);
-    two.rotateX(-Math.PI / 4);
-    triangle.add(two);
-
-    var three = rectangularPrism(4, 20, 2, 0, 0, 0);
-    // three.rotateY(Math.PI / 4);
-    // three.rotateX(Math.PI / 4);
-    three.rotateZ(Math.PI / 2);
-    three.position.set(-2, -10, -0);
-    triangle.add(three);
+    triangle.rotateZ(Math.PI / 6);
+    triangle.position.set(-4, -4, 0);
 
     // var one = rectangularPrism(4, 20, 2, 10, 0, 0);
     // rotate(one, new THREE.Vector3(0, 0, 0), Math.PI);
@@ -102,9 +122,8 @@ function initTriangle() {
 }
 
 function loop() {
-    // triangle.rotation.y += 0.001;
-    // triangle.position.x += 0.002;
-    triangle.needsUpdate = true;
+    triangle.rotation.y += 0.002;
+
     // console.log(triangle.rotation.y)
     requestAnimationFrame(loop);
     renderer.render(scene, camera);
