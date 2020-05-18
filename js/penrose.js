@@ -84,14 +84,14 @@ function initTriangle() {
     var one = rectangularPrism(4, 20, 2);
     var two = rectangularPrism(4, 20, 2);
     var three = new THREE.Group();
-    var material = new THREE.MeshLambertMaterial({
+    var material = new THREE.MeshStandardMaterial({
         color: "blue",
-        side: THREE.DoubleSide,
+        side: THREE.FrontSide,
     });
     material.flatShading = true;
     three.add(
         new THREE.Mesh(
-            new THREE.CylinderGeometry(1, 4 / Math.sqrt(2), 12, 4, 1),
+            new THREE.CylinderGeometry(2.2 / Math.sqrt(2), 4 / Math.sqrt(2), 12, 4, 1, true),
             material
         )
     );
@@ -122,7 +122,7 @@ function initTriangle() {
 }
 
 function loop() {
-    triangle.rotation.y += 0.002;
+    // triangle.rotation.y += 0.02;
 
     // console.log(triangle.rotation.y)
     requestAnimationFrame(loop);
