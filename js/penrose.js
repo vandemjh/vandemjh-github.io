@@ -18,8 +18,8 @@ function init() {
     scene = new THREE.Scene();
     triangle = new THREE.Object3D();
     scene.add(triangle);
-    light = new THREE.PointLight(0xffffff, 3, 100, 2);
-    light.position.set(0, 0, 50);
+    light = new THREE.PointLight(0xffffff, 3, 200, 2);
+    light.position.set(0, 50, 40); //50
     scene.add(light);
 
     renderer = new THREE.WebGLRenderer({ antialias: true }); //TODO for slow clients turn antialias off
@@ -77,9 +77,11 @@ function rectangularPrism(width, height, depth, x, y, z) {
 
 function initTriangle() {
     // Half of depth!
-    var one = rectangularPrism(4, 20, 2, -10, 0, 0);
-    one.rotateY(Math.PI / 4);
-    one.rotateX(Math.PI / 4);
+    var one = rectangularPrism(4, 20, 2, 0, 0, 0);
+    // one.rotateY(Math.PI / 4);
+    // one.rotateX(Math.PI / 4);
+    one.position.set(-5, -2, 0);
+    one.rotateZ(-Math.PI / 6);
     triangle.add(one);
 
     var two = rectangularPrism(4, 20, 2, 10, 0, 0);
@@ -88,10 +90,10 @@ function initTriangle() {
     triangle.add(two);
 
     var three = rectangularPrism(4, 20, 2, 0, 0, 0);
-    three.rotateY(Math.PI / 4);
-    three.rotateX(Math.PI / 4);
+    // three.rotateY(Math.PI / 4);
+    // three.rotateX(Math.PI / 4);
     three.rotateZ(Math.PI / 2);
-    // three.position.set(-10, -7, -0);
+    three.position.set(-2, -10, -0);
     triangle.add(three);
 
     // var one = rectangularPrism(4, 20, 2, 10, 0, 0);
@@ -100,7 +102,7 @@ function initTriangle() {
 }
 
 function loop() {
-    triangle.rotation.y += 0.001;
+    // triangle.rotation.y += 0.001;
     // triangle.position.x += 0.002;
     triangle.needsUpdate = true;
     // console.log(triangle.rotation.y)
