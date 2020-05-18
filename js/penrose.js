@@ -1,4 +1,4 @@
-var camera, scene, renderer, triangle, light;
+var camera, scene, renderer, triangle;
 const sphereDimensions = 2;
 
 window.onresize = function () {
@@ -19,7 +19,10 @@ function init() {
     triangle = new THREE.Object3D();
     scene.add(triangle);
     light = new THREE.PointLight(0xffffff, 3, 200, 2);
-    light.position.set(0, 50, 40); //50
+    light.position.set(0, 50, 50); //50
+    scene.add(light);
+    light = new THREE.PointLight(0xffffff, 3, 80, 2);
+    light.position.set(0, -50, 50); //50
     scene.add(light);
 
     renderer = new THREE.WebGLRenderer({ antialias: true }); //TODO for slow clients turn antialias off
@@ -91,7 +94,7 @@ function initTriangle() {
     material.flatShading = true;
     three.add(
         new THREE.Mesh(
-            new THREE.CylinderGeometry(2.2 / Math.sqrt(2), 4 / Math.sqrt(2), 12, 4, 1, true),
+            new THREE.CylinderGeometry(2.9 / Math.sqrt(2), 4 / Math.sqrt(2), 12, 4, 1, true),
             material
         )
     );
