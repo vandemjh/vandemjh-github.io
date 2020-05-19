@@ -1,4 +1,4 @@
-var camera, scene, renderer, triangle;
+var camera, scene, renderer, triangle, count;
 const sphereDimensions = 2;
 
 window.onresize = function () {
@@ -24,6 +24,8 @@ function init() {
     light = new THREE.PointLight(0xffffff, 3, 90, 2);
     light.position.set(0, -50, 50); //50
     scene.add(light);
+
+    count = 0;
 
     renderer = new THREE.WebGLRenderer({ antialias: true }); //TODO for slow clients turn antialias off
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -135,7 +137,7 @@ function initTriangle() {
             new THREE.CylinderGeometry(
                 2.5 / Math.sqrt(2),
                 3.4 / Math.sqrt(2),
-                12,
+                12.25,
                 4,
                 1,
                 true
@@ -147,11 +149,12 @@ function initTriangle() {
             })
         )
     );
-    three.children[0].position.z += -0.465;
-    three.children[0].position.y += -0.1;
-    three.children[0].position.x += 0.19;
-   	three.children[0].geometry.vertices[3].y += -2.5;
-   	// three.children[0].geometry.vertices[3].z += -;
+    three.children[0].position.z += -0.34;
+    three.children[0].position.y += -0.30;
+    three.children[0].position.x += 0.21;
+   	// three.children[0].geometry.vertices[5].y += -0.19;
+   	three.children[0].geometry.vertices[3].y += -2.47;
+   	three.children[0].geometry.vertices[3].z += -0.1;
    	
     // var three = rectangularPrism(4, 20, 2,);
 
@@ -177,6 +180,8 @@ function initTriangle() {
     triangle.rotation.z += -0.04;
     triangle.position.set(-4, -4, 0);
 
+    // triangle.rotation.y += 10.7;
+
     // var one = rectangularPrism(4, 20, 2, 10, 0, 0);
     // rotate(one, new THREE.Vector3(0, 0, 0), Math.PI);
     // for (rect of one) triangle.add(rect);
@@ -184,8 +189,16 @@ function initTriangle() {
 
 function loop() {
     // triangle.rotation.y += 0.002;
+    count++;
+    // console.log(count)
+    if (count > 200) {
+    	triangle.rotation.y += 0.04;
+    }
+    if (triangle.rotation.y >= Math.PI * 2 - 0.025) {
+    triangle.rotation.y = -0.025;
+    	count = 0;
+    }
 
-    // console.log(triangle.rotation.y)
     requestAnimationFrame(loop);
     renderer.render(scene, camera);
 }
