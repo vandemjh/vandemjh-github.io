@@ -18,10 +18,10 @@ function init() {
     scene = new THREE.Scene();
     triangle = new THREE.Object3D();
     scene.add(triangle);
-    light = new THREE.PointLight(0xffffff, 3, 200, 2);
+    light = new THREE.PointLight(0xffffff, 3, 250, 2);
     light.position.set(0, 50, 50); //50
     scene.add(light);
-    light = new THREE.PointLight(0xffffff, 3, 80, 2);
+    light = new THREE.PointLight(0xffffff, 3, 90, 2);
     light.position.set(0, -50, 50); //50
     scene.add(light);
 
@@ -41,6 +41,7 @@ function rectangularPrism(width, height, depth) {
         new THREE.MeshLambertMaterial({
             color: "blue",
             side: THREE.DoubleSide,
+            flatShading: true
         }),
     ];
     var one = new THREE.Mesh(...geomesh);
@@ -58,6 +59,7 @@ function rectangularPrism(width, height, depth) {
         new THREE.MeshLambertMaterial({
             color: "blue",
             side: THREE.DoubleSide,
+            flatShading: true
         })
     );
     five.rotateX(Math.PI / 2);
@@ -67,6 +69,7 @@ function rectangularPrism(width, height, depth) {
         new THREE.MeshLambertMaterial({
             color: "blue",
             side: THREE.DoubleSide,
+            flatShading: true
         })
     );
     six.rotateX(Math.PI / 2);
@@ -84,23 +87,24 @@ function rectangularPrism(width, height, depth) {
 
 function initTriangle() {
     // Half of depth!
-    var one = rectangularPrism(4, 20, 2);
-   	// var one = new THREE.Group();
-    // one.add(
-        // new THREE.Mesh(
-            // new THREE.CylinderGeometry(3 / Math.sqrt(2), 4 / Math.sqrt(2), 14, 4, 1, true, Math.PI/4),
-            // new THREE.MeshStandardMaterial({
-                    // color: "blue",
-                    // side: THREE.FrontSide,
-                    // flatShading: true
-                // })
-        // )
-    // );
+    // var one = rectangularPrism(4, 20, 2);
+   	var one = new THREE.Group();
+    one.add(
+        new THREE.Mesh(
+            new THREE.CylinderGeometry(3.4 / Math.sqrt(2), 4 / Math.sqrt(2), 16, 4, 1, false, Math.PI/4),
+            new THREE.MeshStandardMaterial({
+                    color: "blue",
+                    side: THREE.DoubleSide,
+                    flatShading: true
+                })
+        )
+    );
+    one.children[0].position.y += 1.99;
     var two = rectangularPrism(4, 20, 2);
     var three = new THREE.Group();
     three.add(
         new THREE.Mesh(
-            new THREE.CylinderGeometry(2.9 / Math.sqrt(2), 4 / Math.sqrt(2), 12, 4, 1, true),
+            new THREE.CylinderGeometry(2.5 / Math.sqrt(2), 3.4 / Math.sqrt(2), 12, 4, 1, true),
             new THREE.MeshStandardMaterial({
                     color: "blue",
                     side: THREE.FrontSide,
@@ -108,25 +112,32 @@ function initTriangle() {
                 })
         )
     );
+    three.children[0].position.z += -0.465;
+    three.children[0].position.y += -0.1;
+    three.children[0].position.x += 0.19;
     // var three = rectangularPrism(4, 20, 2,);
 
+    /* --- One transforms --- */
+    // one.position.z += 2;
+    one.rotateX(Math.PI / 4);
+    one.rotateZ(-Math.PI / 4);
+
+    /* --- Two transforms --- */
     two.rotateZ(Math.PI / 2);
     two.position.set(8, -8, 0);
     one.add(two);
 
+    /* --- Three transforms --- */
     three.rotateX(Math.PI / 2);
     three.rotateY(Math.PI / 4);
     three.position.set(0, 8, 8);
     console.log(three);
     one.add(three);
 
-    // one.rotateY(Math.PI / 6);
-    one.rotateX(Math.PI / 4);
-    one.rotateZ(-Math.PI / 4);
-    // one.rotateX(Math.PI / 10);
-    // one.position.set(-8, 0, 0);
     triangle.add(one);
     triangle.rotateZ(Math.PI / 6);
+    triangle.rotation.y += -0.025;
+    triangle.rotation.z += -0.04;
     triangle.position.set(-4, -4, 0);
 
     // var one = rectangularPrism(4, 20, 2, 10, 0, 0);
@@ -135,7 +146,7 @@ function initTriangle() {
 }
 
 function loop() {
-    triangle.rotation.y += 0.001;
+    // triangle.rotation.y += 0.001;
 
     // console.log(triangle.rotation.y)
     requestAnimationFrame(loop);
