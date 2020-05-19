@@ -191,7 +191,7 @@ function loop() {
     // triangle.rotation.y += 0.002;
     count++;
     // console.log(count)
-    if (count > 200) {
+    if (count > 300) {
     	triangle.rotation.y += 0.04;
     }
     if (triangle.rotation.y >= Math.PI * 2 - 0.025) {
