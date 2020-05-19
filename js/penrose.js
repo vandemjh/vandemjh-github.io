@@ -85,17 +85,27 @@ function rectangularPrism(width, height, depth) {
 function initTriangle() {
     // Half of depth!
     var one = rectangularPrism(4, 20, 2);
+   	// var one = new THREE.Group();
+    // one.add(
+        // new THREE.Mesh(
+            // new THREE.CylinderGeometry(3 / Math.sqrt(2), 4 / Math.sqrt(2), 14, 4, 1, true, Math.PI/4),
+            // new THREE.MeshStandardMaterial({
+                    // color: "blue",
+                    // side: THREE.FrontSide,
+                    // flatShading: true
+                // })
+        // )
+    // );
     var two = rectangularPrism(4, 20, 2);
     var three = new THREE.Group();
-    var material = new THREE.MeshStandardMaterial({
-        color: "blue",
-        side: THREE.FrontSide,
-    });
-    material.flatShading = true;
     three.add(
         new THREE.Mesh(
             new THREE.CylinderGeometry(2.9 / Math.sqrt(2), 4 / Math.sqrt(2), 12, 4, 1, true),
-            material
+            new THREE.MeshStandardMaterial({
+                    color: "blue",
+                    side: THREE.FrontSide,
+                    flatShading: true
+                })
         )
     );
     // var three = rectangularPrism(4, 20, 2,);
@@ -125,7 +135,7 @@ function initTriangle() {
 }
 
 function loop() {
-    // triangle.rotation.y += 0.02;
+    triangle.rotation.y += 0.001;
 
     // console.log(triangle.rotation.y)
     requestAnimationFrame(loop);
