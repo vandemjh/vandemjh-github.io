@@ -1,4 +1,6 @@
 var camera, scene, renderer, triangle, count;
+var color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+
 const sphereDimensions = 2;
 
 window.onresize = function () {
@@ -18,10 +20,10 @@ function init() {
     scene = new THREE.Scene();
     triangle = new THREE.Object3D();
     scene.add(triangle);
-    light = new THREE.PointLight(0xffffff, 3, 250, 2);
+    light = new THREE.PointLight(0xffffff, 3, 250, 1.5);
     light.position.set(0, 50, 50); //50
     scene.add(light);
-    light = new THREE.PointLight(0xffffff, 3, 90, 2);
+    light = new THREE.PointLight(0xffffff, 3, 90, 1.5);
     light.position.set(0, -50, 50); //50
     scene.add(light);
 
@@ -41,7 +43,7 @@ function rectangularPrism(width, height, depth) {
     var geomesh = [
         new THREE.PlaneGeometry(width, height),
         new THREE.MeshLambertMaterial({
-            color: "blue",
+            color: color,
             side: THREE.DoubleSide,
             flatShading: true,
         }),
@@ -59,7 +61,7 @@ function rectangularPrism(width, height, depth) {
     var five = new THREE.Mesh(
         new THREE.PlaneGeometry(depth * 2, depth * 2),
         new THREE.MeshLambertMaterial({
-            color: "blue",
+            color: color,
             side: THREE.DoubleSide,
             flatShading: true,
         })
@@ -69,7 +71,7 @@ function rectangularPrism(width, height, depth) {
     var six = new THREE.Mesh(
         new THREE.PlaneGeometry(depth * 2, depth * 2),
         new THREE.MeshLambertMaterial({
-            color: "blue",
+            color: color,
             side: THREE.DoubleSide,
             flatShading: true,
         })
@@ -103,14 +105,18 @@ function initTriangle() {
                 Math.PI / 4
             ),
             new THREE.MeshStandardMaterial({
-                color: "blue",
+                color: color,
                 side: THREE.DoubleSide,
                 flatShading: true,
             })
         )
     );
+    // one.children[0].geometry.vertices[4].x += -0.1;
+    // one.children[0].geometry.vertices[4].z += 0.1;
+    // one.children[0].geometry.vertices[4].y += -0.1;
     one.children[0].position.y += 2.0;
     
+
     // var two = rectangularPrism(4, 20, 2);
     var two = new THREE.Group();
     two.add(
@@ -125,11 +131,13 @@ function initTriangle() {
                 Math.PI / 4
             ),
             new THREE.MeshStandardMaterial({
-                color: "blue",
+                color: color,
                 flatShading: true,
             })
         )
     );
+    // two.children[0].geometry.vertices[5].y += -.1;
+    // two.children[0].geometry.vertices[5].z += -.1;
 
     var three = new THREE.Group();
     three.add(
@@ -143,19 +151,19 @@ function initTriangle() {
                 true
             ),
             new THREE.MeshStandardMaterial({
-                color: "blue",
+                color: color,
                 side: THREE.FrontSide,
                 flatShading: true,
             })
         )
     );
     three.children[0].position.z += -0.34;
-    three.children[0].position.y += -0.30;
+    three.children[0].position.y += -0.3;
     three.children[0].position.x += 0.21;
-   	// three.children[0].geometry.vertices[5].y += -0.19;
-   	three.children[0].geometry.vertices[3].y += -2.47;
-   	three.children[0].geometry.vertices[3].z += -0.1;
-   	
+    // three.children[0].geometry.vertices[5].y += -0.19;
+    three.children[0].geometry.vertices[3].y += -2.47;
+    three.children[0].geometry.vertices[3].z += -0.1;
+
     // var three = rectangularPrism(4, 20, 2,);
 
     /* --- One transforms --- */
@@ -180,11 +188,6 @@ function initTriangle() {
     triangle.rotation.z += -0.04;
     triangle.position.set(-4, -4, 0);
 
-    // triangle.rotation.y += 10.7;
-
-    // var one = rectangularPrism(4, 20, 2, 10, 0, 0);
-    // rotate(one, new THREE.Vector3(0, 0, 0), Math.PI);
-    // for (rect of one) triangle.add(rect);
 }
 
 function loop() {
@@ -192,11 +195,11 @@ function loop() {
     count++;
     // console.log(count)
     if (count > 300) {
-    	triangle.rotation.y += 0.04;
+        triangle.rotation.y += 0.04;
     }
     if (triangle.rotation.y >= Math.PI * 2 - 0.025) {
-    triangle.rotation.y = -0.025;
-    	count = 0;
+        triangle.rotation.y = -0.025;
+        count = 0;
     }
 
     requestAnimationFrame(loop);
