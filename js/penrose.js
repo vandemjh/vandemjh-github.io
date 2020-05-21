@@ -111,11 +111,11 @@ function initTriangle() {
             })
         )
     );
-    // one.children[0].geometry.vertices[4].x += -0.1;
+    // one.children[0].geometry.vertices[1].y += .4;
+    // one.children[0].geometry.vertices[1].x += .01;
     // one.children[0].geometry.vertices[4].z += 0.1;
     // one.children[0].geometry.vertices[4].y += -0.1;
     one.children[0].position.y += 2.0;
-    
 
     // var two = rectangularPrism(4, 20, 2);
     var two = new THREE.Group();
@@ -187,7 +187,6 @@ function initTriangle() {
     triangle.rotation.y += -0.025;
     triangle.rotation.z += -0.04;
     triangle.position.set(-4, -4, 0);
-
 }
 
 function loop() {
