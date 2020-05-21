@@ -172,10 +172,10 @@ function initMountains() {
             //Fill points
             // var geometry = new THREE.Geometry().setFromPoints(points).computeFaceNormals();
             // chunk.add(
-                // new THREE.Mesh(
-                    // geometry,
-                    // new THREE.MeshBasicMaterial({ color: "black" })
-                // )
+            // new THREE.Mesh(
+            // geometry,
+            // new THREE.MeshBasicMaterial({ color: "black" })
+            // )
             // );
         }
         scene.add(chunk);
