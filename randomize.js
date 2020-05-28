@@ -4,7 +4,8 @@ const jsFiles = [
     "click.js",
     "outrun.js",
     "penrose.js",
-    "paradise.js"
+    "paradise.js",
+    "sphere.js"
 ];
 
 window.onload = () => {
