@@ -1,3 +1,9 @@
+/**
+ * Adds a mouse variable and two event listeners,
+ * one for mouse movements and one for clicks
+ * which call mousemove() and click() functions
+ * respectivly if they have been defined.
+**/
 var mouse = new THREE.Vector2();
 mouse.x = undefined;
 mouse.y = undefined;
