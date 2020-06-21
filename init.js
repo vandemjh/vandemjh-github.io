@@ -6,7 +6,7 @@ const jsFiles = {
     "outrun.js": [],
     "penrose.js": [],
     "paradise.js": [],
-    "global.js": ["onresize", "init"],
+    "global.js": ["onresize", "init", "colors"],
 };
 
 var debug = false;
