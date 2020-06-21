@@ -1,0 +1,1 @@
+const HACKERGREEN = 0x20c20e;
