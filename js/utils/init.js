@@ -4,7 +4,7 @@
 
 var camera, scene, renderer;
 
-function init() {
+function initUtil() {
     camera = new THREE.PerspectiveCamera(
         50,
         window.innerWidth / window.innerHeight,
@@ -20,10 +20,10 @@ function init() {
     document.body.appendChild(renderer.domElement);
 }
 
-function loop() {
-    requestAnimationFrame(loop);
+function loopUtil() {
+    // requestAnimationFrame(loop);
     renderer.render(scene, camera);
 }
 
-init();
-loop();
+// init();
+// loop();
