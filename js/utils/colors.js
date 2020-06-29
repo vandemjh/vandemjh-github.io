@@ -1,3 +1,5 @@
+/**
+ * Initializes commonly used colors
+**/
 
-
-const LIMEGREEN = 0x20c20e;
+export const LIMEGREEN = 0x20c20e;

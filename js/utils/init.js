@@ -2,9 +2,9 @@
  * Initializes commonly used variables and methods
 **/
 
-var camera, scene, renderer;
+export var camera, scene, renderer;
 
-function initUtil() {
+export function initUtil() {
     camera = new THREE.PerspectiveCamera(
         50,
         window.innerWidth / window.innerHeight,
@@ -20,7 +20,7 @@ function initUtil() {
     document.body.appendChild(renderer.domElement);
 }
 
-function loopUtil() {
+export function loopUtil() {
     // requestAnimationFrame(loop);
     renderer.render(scene, camera);
 }
