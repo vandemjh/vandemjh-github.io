@@ -1,5 +1,7 @@
+import { randomColor } from "./utils/colors.js";
+
 var camera, scene, renderer, triangle, count;
-var color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+var color = randomColor();
 
 const sphereDimensions = 2;
 
@@ -20,7 +22,7 @@ function init() {
     scene = new THREE.Scene();
     triangle = new THREE.Object3D();
     scene.add(triangle);
-    light = new THREE.PointLight(0xffffff, 3, 250, 1.5);
+    var light = new THREE.PointLight(0xffffff, 3, 250, 1.5);
     light.position.set(0, 50, 50); //50
     scene.add(light);
     light = new THREE.PointLight(0xffffff, 3, 90, 1.5);

@@ -17,7 +17,7 @@ function init() {
     camera.position.z = 50;
     scene = new THREE.Scene();
     cubeGroup = new THREE.Group();
-    outterCube = new THREE.Group();
+    var outterCube = new THREE.Group();
     scene.add(cubeGroup);
 
     renderer = new THREE.WebGLRenderer({ antialias: true }); //TODO for slow clients turn antialias off
@@ -30,7 +30,7 @@ function init() {
 function initCube(x, y, z) {
     var geometry = new THREE.BoxGeometry(2, 2, 2);
 
-    mesh = new THREE.Mesh(geometry, new THREE.MeshNormalMaterial());
+    var mesh = new THREE.Mesh(geometry, new THREE.MeshNormalMaterial());
     mesh.position.x = x;
     mesh.position.y = y;
     mesh.position.z = z;

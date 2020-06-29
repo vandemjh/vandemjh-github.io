@@ -160,7 +160,7 @@ function init() {
 
     scene = new THREE.Scene();
     chunkArray = [];
-    light = new THREE.PointLight(0xffffff, 3, 100, 2);
+    var light = new THREE.PointLight(0xffffff, 3, 100, 2);
     light.position.set(0, 25, 25); //50
     scene.add(light);
 

@@ -36,13 +36,13 @@ function init() {
     );
     camera.position.z = 80;
 
-    lightSource = new THREE.PointLight(0xffffff, 1, 10, 2);
+    var lightSource = new THREE.PointLight(0xffffff, 1, 10, 2);
     lightSource.position.set(0, 1, 8);
-    lightSource1 = new THREE.PointLight(0xffffff, 1, 10, 2);
+    var lightSource1 = new THREE.PointLight(0xffffff, 1, 10, 2);
     lightSource1.position.set(0, -1, 8);
-    lightSource2 = new THREE.PointLight(0xffffff, 1, 10, 2);
+    var lightSource2 = new THREE.PointLight(0xffffff, 1, 10, 2);
     lightSource2.position.set(-1, 0, 8);
-    lightSource3 = new THREE.PointLight(0xffffff, 1, 10, 2);
+    var lightSource3 = new THREE.PointLight(0xffffff, 1, 10, 2);
     lightSource3.position.set(1, 0, 8);
 
     scene = new THREE.Scene();
@@ -76,7 +76,7 @@ function initCube(x, y, z) {
         boxDimensions
     );
 
-    toPush = new THREE.Mesh(geometry, new THREE.MeshToonMaterial());
+    var toPush = new THREE.Mesh(geometry, new THREE.MeshToonMaterial());
     toPush.position.x = x;
     toPush.position.y = y;
     toPush.position.z = z;
@@ -101,11 +101,14 @@ function loop() {
     if (counter >= 10) {
         counter = 0;
         // console.log(cu.beGroup.children[random(0, cubeGroup.children.length - 1)])
-        xcube = cubeGroup.children[random(0, cubeGroup.children.length - 1)];
+        var xcube =
+            cubeGroup.children[random(0, cubeGroup.children.length - 1)];
         xcube.reverseX = xcube.reverseX == true ? false : true;
-        ycube = cubeGroup.children[random(0, cubeGroup.children.length - 1)];
+        var ycube =
+            cubeGroup.children[random(0, cubeGroup.children.length - 1)];
         ycube.reverseY = ycube.reverseY == true ? false : true;
-        zcube = cubeGroup.children[random(0, cubeGroup.children.length - 1)];
+        var zcube =
+            cubeGroup.children[random(0, cubeGroup.children.length - 1)];
         zcube.reverseZ = zcube.reverseZ == true ? false : true;
     }
 
