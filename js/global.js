@@ -1,3 +1,9 @@
+import * as Colors from "./utils/colors.js"
+import {
+	camera, scene, renderer, initUtil, loopUtil
+} from './utils/init.js'
+import './utils/onresize.js'
+
 var globe;
 
 function loop() {
@@ -16,7 +22,7 @@ function initGlobe() {
     var ring = new THREE.Mesh(
         new THREE.TorusGeometry(1, 0.008, 30, 30),
         new THREE.MeshBasicMaterial({
-            color: LIMEGREEN,
+            color: Colors.LIMEGREEN,
             side: THREE.DoubleSide,
         })
     );
