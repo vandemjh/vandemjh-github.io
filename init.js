@@ -14,7 +14,7 @@ var debug = false;
 
 window.onload = () => {
     var script = document.createElement("script");
-    script.type = "module"
+    script.type = "module";
     var url = window.location.href;
     var split = url.split("?");
     var param = split[split.length - 1];
@@ -23,7 +23,8 @@ window.onload = () => {
         param != undefined &&
         Object.keys(jsFiles).some((file) => file.includes(param))
     ) {
-    	script.src = "js/" + Object.keys(jsFiles).find((file) => file.includes(param))
+        script.src =
+            "js/" + Object.keys(jsFiles).find((file) => file.includes(param));
     } else {
         var source = Object.keys(jsFiles)[
             Math.floor(Math.random() * Object.keys(jsFiles).length)
