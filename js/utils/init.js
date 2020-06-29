@@ -1,6 +1,6 @@
 /**
  * Initializes commonly used variables and methods
-**/
+ **/
 
 export var camera, scene, renderer;
 

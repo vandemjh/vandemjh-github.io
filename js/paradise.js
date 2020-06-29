@@ -102,11 +102,11 @@ function initShapes() {
         shapeGroup.children.forEach((shape) => {
             shape.position.z += 0.05;
             if (shape.position.z > 55) {
-            // shape.geometry.dispose();
-            // shape.material.dispose();
-            // scene.remove(shape);
-            // shapeGroup.create();
-            shape.position.z = 0;
+                // shape.geometry.dispose();
+                // shape.material.dispose();
+                // scene.remove(shape);
+                // shapeGroup.create();
+                shape.position.z = 0;
             }
         });
     };
@@ -139,9 +139,9 @@ function initShapes() {
                 break;
         }
         mesh.position.set(random(-10, 10), random(-10, 10), random(0, 50));
-        mesh.rotateX(random(0,10))
-        mesh.rotateY(random(0,10))
-        mesh.rotateZ(random(0,10))
+        mesh.rotateX(random(0, 10));
+        mesh.rotateY(random(0, 10));
+        mesh.rotateZ(random(0, 10));
         shapeGroup.add(mesh);
     };
     for (var i = 0; i < 100; i++) shapeGroup.create();

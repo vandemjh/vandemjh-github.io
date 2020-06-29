@@ -1,8 +1,6 @@
-import * as Colors from "./utils/colors.js"
-import {
-	camera, scene, renderer, initUtil, loopUtil
-} from './utils/init.js'
-import './utils/onresize.js'
+import * as Colors from "./utils/colors.js";
+import { camera, scene, renderer, initUtil, loopUtil } from "./utils/init.js";
+import "./utils/onresize.js";
 
 var globe;
 
@@ -31,7 +29,7 @@ function initGlobe() {
         var newRing = ring.clone();
         newRing.rotation.x += i;
         globe.add(newRing);
-    }    
+    }
     for (let i = 0; i < 2 * Math.PI; i += Math.PI / 6) {
         var newRing = ring.clone();
         newRing.rotation.y += i;
