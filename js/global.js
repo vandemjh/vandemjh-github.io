@@ -1,27 +1,18 @@
-import {LIMEGREEN} from "./utils/colors.js";
-import { camera, scene, renderer, initUtil, loopUtil } from "./utils/init.js";
+import * as Colors from "./utils/colors.js";
+import { camera, scene, initUtil, loopUtil } from "./utils/init.js";
 import "./utils/onresize.js";
-import { EffectComposer } from '../node_modules/three/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from '../node_modules/three/examples/jsm/postprocessing/RenderPass.js';
-import { GlitchPass } from '../node_modules/three/examples/jsm/postprocessing/GlitchPass.js';
 
-var globe, composer, glitchPass;
+var globe;
 
 function loop() {
     requestAnimationFrame(loop);
     // globe.rotation.z += 0.002;
     globe.update();
-    composer.render();
-    // loopUtil();
+    loopUtil();
 }
 
 function init() {
     initUtil();
-    composer = new EffectComposer(renderer);
-    composer.addPass(new RenderPass(scene, camera));
-    glitchPass = new GlitchPass();
-    // glitchPass.goWild = true;
-    composer.addPass(glitchPass);
     camera.position.set(0, 0, 5);
 }
 
@@ -30,7 +21,7 @@ function initGlobe() {
     var ring = new THREE.Mesh(
         new THREE.TorusGeometry(1, 0.008, 30, 30),
         new THREE.MeshBasicMaterial({
-            color: LIMEGREEN,
+            color: Colors.LIMEGREEN,
             side: THREE.DoubleSide,
         })
     );
@@ -52,13 +43,13 @@ function initGlobe() {
         globe.latitude.forEach((line) => {
             if (line.position.x > 0)
                 line.scale.set(
-                    Math.sqrt(-1 * (line.position.x - 1)),
-                    Math.sqrt(-1 * (line.position.x - 1)),
+                    Math.sqrt(-1 * (line.position.x - 1)), 
+                    Math.sqrt(-1 * (line.position.x - 1)), 
                     1);
             if (line.position.x < 0)
                 line.scale.set(
-                    Math.sqrt(line.position.x + 1),
-                    Math.sqrt(line.position.x + 1),
+                    Math.sqrt(line.position.x + 1), 
+                    Math.sqrt(line.position.x + 1), 
                     1);
             line.position.x -= 0.002;
             if (line.position.x < -1) {
