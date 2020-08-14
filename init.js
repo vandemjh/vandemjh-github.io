@@ -8,6 +8,7 @@ const jsFiles = {
     "penrose.js": [],
     "paradise.js": [],
     "global.js": [],
+    "graph.js": []
 };
 
 var debug = false;
