@@ -26,12 +26,12 @@ function initGraph() {
     })
   );
   var points = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 12; i++) {
     var clone = node.clone();
     clone.position.set(
-      randomDecimals(-1, 1),
-      randomDecimals(-1, 1),
-      randomDecimals(-1, 1)
+      randomDecimals(-2, 2),
+      randomDecimals(-2, 2),
+      randomDecimals(-2, 2)
     );
     graph.add(clone);
   }
@@ -39,14 +39,10 @@ function initGraph() {
     return graph.children[random(0, graph.children.length - 1)];
   };
 
-  graph.children.forEach(() => {
+  for (let i = 0; i < 5; i++)
     graph.children.forEach((child) => {
-      var child = graph.getRandomChild();
-      points.push(
-        new THREE.Vector3(child.position.x, child.position.y, child.position.z)
-      );
+      points.push(graph.getRandomChild().position);
     });
-  });
   const edge = new THREE.Line(
     new THREE.Geometry().setFromPoints(points),
     new THREE.LineBasicMaterial({ color: Colors.LIMEGREEN })
@@ -57,6 +53,11 @@ function initGraph() {
     graph.rotation.x += 0.004;
     graph.rotation.y += 0.004;
     graph.rotation.z += 0.004;
+    // graph.children.forEach(child => {
+    //   child.position.x += Math.random()/200
+    //   child.position.y += Math.random()/200
+    //   child.position.z += Math.random()/200
+    // })
   };
 
   scene.add(graph);
