@@ -1,46 +1,46 @@
 body {
-    margin: 0;
-    overflow: hidden;
-    z-index: 100;
+  margin: 0;
+  overflow: hidden;
+  z-index: 100;
 }
 p {
-    font-family: Ubuntu Mono;
-    text-align: center;
+  font-family: Ubuntu Mono;
+  text-align: center;
 }
 #t {
-    top: 5%;
-    font-size: 200%;
-    color: white;
-    position: absolute;
-    width: 100%;
+  top: 5%;
+  font-size: 200%;
+  color: white;
+  position: absolute;
+  width: 100%;
 }
 #m {
-    top: 20%;
-    font-size: 100%;
-    color: white;
-    position: absolute;
-    width: 100%;
+  top: 20%;
+  font-size: 100%;
+  color: white;
+  position: absolute;
+  width: 100%;
 }
 #b {
-    top: 20%;
-    font-size: 50%;
-    color: white;
-    position: absolute;
-    width: 100%;
+  top: 20%;
+  font-size: 50%;
+  color: white;
+  position: absolute;
+  width: 100%;
 }
 #socials {
-    top: 90%;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    align-items: center;
+  top: 90%;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  align-items: center;
 }
 #icon {
-    max-width: 5%;
-    padding: 1em;
+  max-width: 5%;
+  padding: 1em;
 }
 img {
-    max-width: 100%;
-    max-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
