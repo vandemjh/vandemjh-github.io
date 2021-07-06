@@ -19,7 +19,7 @@ function init() {
 function initGraph() {
   graph = new THREE.Object3D();
   const node = new THREE.Mesh(
-    new THREE.SphereGeometry(0.05, 10, 10),
+    new THREE.SphereGeometry(0.025, 10, 10),
     new THREE.MeshBasicMaterial({
       color: Colors.LIMEGREEN,
       side: THREE.DoubleSide,
@@ -40,24 +40,41 @@ function initGraph() {
   };
 
   for (let i = 0; i < 5; i++)
-    graph.children.forEach((child) => {
+    graph.children.forEach((_child) => {
       points.push(graph.getRandomChild().position);
     });
-  const edge = new THREE.Line(
-    new THREE.Geometry().setFromPoints(points),
+  var edge = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(points),
     new THREE.LineBasicMaterial({ color: Colors.LIMEGREEN })
   );
   graph.add(edge);
 
+  var counter = 1;
+  points.forEach((child) => {
+    child.xAdder = Math.random() / 1000;
+    child.yAdder = Math.random() / 1000;
+    child.zAdder = Math.random() / 1000;
+  });
+
   graph.update = () => {
-    graph.rotation.x += 0.004;
-    graph.rotation.y += 0.004;
-    graph.rotation.z += 0.004;
-    // graph.children.forEach(child => {
-    //   child.position.x += Math.random()/200
-    //   child.position.y += Math.random()/200
-    //   child.position.z += Math.random()/200
-    // })
+    // if (counter % 500 == 0) {
+    //   points = []
+    //   for (let i = 0; i < 5; i++)
+    //   graph.children.forEach((_child) => {
+    //     points.push(graph.getRandomChild().position);
+    //   });
+    // }
+    edge.geometry.setFromPoints(points);
+    points.forEach((child) => {
+      child.x += child.xAdder;
+      child.y += child.yAdder;
+      child.z += child.zAdder;
+      if (child.x >= 1.5 || child.x <= -1.5) child.xAdder *= -1;
+      if (child.y >= 1.5 || child.y <= -1.5) child.yAdder *= -1;
+      if (child.z >= 1.5 || child.z <= -1.5) child.zAdder *= -1;
+    });
+
+    counter++;
   };
 
   scene.add(graph);
