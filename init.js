@@ -9,6 +9,7 @@ const jsFiles = {
   'paradise.js': [],
   'global.js': [],
   'graph.js': [],
+  'energy.js': [],
 };
 
 var debug = false;

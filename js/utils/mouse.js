@@ -1,7 +1,7 @@
 /**
  * Adds a mouse variable and two event listeners,
  * one for mouse movements and one for clicks
- * which call mousemove() and click() functions
+ * which call mouse.mousemove() and mouse.click() functions
  * respectivly if they have been defined.
  **/
 export var mouse = new THREE.Vector2();
@@ -14,11 +14,7 @@ document.addEventListener(
     // event.preventDefault();
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    if (typeof mousemove === 'function') mousemove();
-    else
-      console.log(
-        'This is Jack, create a mousemove() function to trigger when the mouse is moved'
-      );
+    if (typeof mouse.mousemove === 'function') mouse.mousemove();
   },
   false
 );
@@ -26,11 +22,7 @@ document.addEventListener(
   'click',
   () => {
     // event.preventDefault();
-    if (typeof click === 'function') click();
-    else
-      console.log(
-        'This is Jack, create a click() function to trigger when clicked'
-      );
+    if (typeof mouse.click === 'function') mouse.click();
   },
   false
 );
