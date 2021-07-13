@@ -12,7 +12,7 @@ import { random, visibleYAtZ, visibleXAtZ } from './utils/utils.js';
 import { mouse } from './utils/mouse.js';
 import './utils/onresize.js';
 
-const speed = 0.3;
+const speed = 0.2;
 const sphereSegments = 4;
 const switchDirectionsMultiple = 2;
 const volts = [];
@@ -134,5 +134,8 @@ const createVolt = (x, y) => {
 mouse.click = () => {
   for (let i = 0; i < 5; i++) volts.push(createVolt(0, 0));
 };
+
+for (let i = 0; i < 25; i++)
+  volts.push(createVolt(random(-10, 10), random(-10, 10)));
 
 loop();
