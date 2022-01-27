@@ -5,7 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "stats.js": "^0.17.0",
-    "three": "^0.125.0"
+    "three": "^0.137.0"
   },
   "devDependencies": {
     "live-server": "^1.2.1"
